@@ -1,0 +1,29 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  labels:
+    app: blog
+  name: blog
+spec:
+  rules:
+    - host: "admin.franxx.top" # https 一定要设置指定的域名
+      http:
+        paths:
+          - backend:
+              serviceName: blog-backstage
+              servicePort: 8080
+            path: /
+    - host: "www.franxx.top" # https 一定要设置指定的域名
+      http:
+        paths:
+          - backend:
+              serviceName: blog-web
+              servicePort: 8081
+            path: /
+    - host: "image.franxx.top" # https 一定要设置指定的域名
+      http:
+        paths:
+          - backend:
+              serviceName: blog-image
+              servicePort: 8082
+            path: /            

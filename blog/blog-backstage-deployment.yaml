@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: blog-backstage
+  name: blog-backstage
+spec:
+  replicas: 1
+  selector:
+   matchLabels:
+     app: blog-backstage
+  template:
+    metadata:
+      labels:
+        app: blog-backstage
+    spec:
+      containers:
+        - name: blog-backstage
+          image: registry.cn-shanghai.aliyuncs.com/mikoto/blog-backstage:0.2
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          resources: {}
+      hostNetwork: true
+      restartPolicy: Always
+

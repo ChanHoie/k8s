@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  labels:
+    app: blog-backstage
+  name: blog-backstage
+spec:
+  rules:
+    - host: "www.franxx.top" # https 一定要设置指定的域名
+      http:
+        paths:
+          - backend:
+              serviceName: blog-backstage
+              servicePort: 8080
+            path: /

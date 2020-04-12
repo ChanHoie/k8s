@@ -1,0 +1,23 @@
+kubeadm init --kubernetes-version=1.17.4 \
+--image-repository registry.aliyuncs.com/google_containers \
+
+
+yum install -y kubelet-1.17.3-0 kubeadm-1.17.3-0 kubectl-1.17.3-0
+
+kubectl.x86_64
+...
+
+KUBECONFIG=ali-config:local-config kubectl config view --flatten > $HOME/.kube/config
+
+openssl req -new -x509 -key tls.key -out tls.crt -subj /C=CN/ST=GuangDong/L=Guangzhou/O=DevOps/CN=www.franxx.top
+
+kubectl create secret tls tomcat-ingress-secret --cert=tls.crt --key=tls.key 
+
+docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/nginx-ingress-controller:0.30.0
+
+docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/nginx-ingress-controller:0.30.0 quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.30.0
+
+
+kubeadm init --ignore-preflight-errors=NumCPU --apiserver-cert-extra-sans=47.103.53.243
+
+KUBECONFIG=config-lo:config-ali kubectl config view --flatten > $HOME/.kube/config

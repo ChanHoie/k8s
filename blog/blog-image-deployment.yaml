@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: blog-image
+  name: blog-image
+spec:
+  replicas: 1
+  selector:
+   matchLabels:
+     app: blog-image
+  template:
+    metadata:
+      labels:
+        app: blog-image
+    spec:
+      containers:
+        - name: blog-image
+          image: docker.io/nginx:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8082
+          volumeMounts:
+           - mountPath: /home/ftpuser/www  # 容器内路径
+             name: images     # 要与 volume 中 name 匹配
+          volumeMounts:
+           - mountPath: /etc/nginx/nginx.conf    # 容器内路径
+             name: nginx-conf     # 要与 volume 中 name 匹配
+             subPath: nginx.conf
+      volumes:
+      - name: images
+        hostPath:
+          path: /home/ftpuser/www
+      - name: nginx-conf
+        hostPath:
+          path: /root/work/
+      hostNetwork: true
+      restartPolicy: Always
+
