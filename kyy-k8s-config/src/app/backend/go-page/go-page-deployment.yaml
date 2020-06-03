@@ -1,0 +1,54 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: go-page
+  name: go-page
+spec:
+  replicas: 2
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: go-page
+    spec:
+      containers:
+        - env:
+            - name: DATABASE_HOST
+              value: rm-2zeb1f93086857hv0.mysql.rds.aliyuncs.com
+            - name: DATABASE_NAME
+              value: kaoyaya_yuncms
+            - name: DATABASE_PASSWORD
+              value: 4PYmsab4Ukyh
+            - name: DATABASE_USER
+              value: kyy_yuncms
+            - name: MASTER_DB_HOST
+              value: rm-2ze8m2daqb051wp49.mysql.rds.aliyuncs.com
+            - name: MASTER_DB_NAME
+              value: sq_kaoyaya
+            - name: MASTER_DB_PASSWORD
+              value: tdHRdT7V2o4d
+            - name: MASTER_DB_USER
+              value: kyy_master
+            - name: PORT
+              value: "80"
+            - name: REDIS_AUTH
+              value: 9V3zrtA338ULq6N7s2
+            - name: REDIS_HOST
+              value: r-2ze6269f42e1f8c4.redis.rds.aliyuncs.com:6379
+            - name: RUN_MODE
+              value: production
+            - name: WECHAT_DB_HOST
+              value: rm-2zeb1f93086857hv0.mysql.rds.aliyuncs.com
+            - name: WECHAT_DB_NAME
+              value: wechat
+            - name: WECHAT_DB_PASSWORD
+              value: 4PYmsab4Ukyh
+            - name: WECHAT_DB_USER
+              value: kyy_yuncms
+          image: registry.cn-qingdao.aliyuncs.com/kaoyaya-micro/page:latest
+          name: go-page
+          ports:
+            - containerPort: 80
+          resources: {}
+      restartPolicy: Always

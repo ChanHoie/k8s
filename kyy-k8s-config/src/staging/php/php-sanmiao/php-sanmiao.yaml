@@ -1,0 +1,40 @@
+php-sanmiao:
+  image: registry.cn-qingdao.aliyuncs.com/kaoyaya/kaoyayacn
+  hostname: kaoyaya-client
+  #cpu_shares: 80
+  #mem_limit: 2147483648 #2G
+  expose:
+    -  80/tcp
+  ports:
+    - '80'
+  restart: always
+  labels:
+    aliyun.log_store_s1: /var/log/apache2/error*.log
+
+    aliyun.proxy.VIRTUAL_HOST_WEIGHT: '22'
+    aliyun.proxy.VIRTUAL_HOST:  "https://www.kaoyaya.com,http://www.kaoyaya.com,http://kaoyaya.com,http://caishidian.kaoyaya.com,http://www.caishidian.com,http://www.91sanmiao.com,http://www.119test.com"
+  environment:
+    - DOCUMENTROOT=/var/www/html/kaoyayacn/
+    - APP_DEBUG=false
+    - THINK_LOG_PATH=/var/www/html/kaoyayacn/new
+    - DB_HOST=rm-2ze8m2daqb051wp49.mysql.rds.aliyuncs.com
+    - DB_PORT=3306
+    - DB_DATABASE=sq_kaoyaya
+    - DB_USER=kyy_master
+    - DB_PASSWORD=tdHRdT7V2o4d
+    - REDIS_HOST=r-2ze6269f42e1f8c4.redis.rds.aliyuncs.com
+    - REDIS_PORT=6379
+    - REDIS_AUTH=9V3zrtA338ULq6N7s2
+    - LOAD_IP=139.129.76.120
+    - DOMAIN_NAME=www.kaoyaya.com
+    - SOCKET_OP=wechat-im-socket
+    - SOCKET_URL=wss://wxws.kaoyaya.com
+    - MESSAGE_SERVER_URI=message-server
+    - WX_ARTICLEIP=wx-article-server
+    - TAX_IP=taxation-server
+    - VOUCHER_SERVER_URL=http://voucher-service:3003
+    - SMS_SERVER_URL=http://sms-service:3005
+    - KNOWLEDGE_SERVER_URL=http://knowledge-service:3007
+    - COMMENT_SERVER_URL=http://comments-service:3009
+    - MICRO_SERVER_URL=http://micro:8080/rpc
+    - WECHAT_DB_CONFIG=mysql://kyy_yuncms:4PYmsab4Ukyh@rm-2zeb1f93086857hv0.mysql.rds.aliyuncs.com/wechat#utf8

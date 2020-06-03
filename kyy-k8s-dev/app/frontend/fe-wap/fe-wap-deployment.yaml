@@ -1,0 +1,24 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: fe-wap
+  name: fe-wap
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: fe-wap
+    spec:
+      imagePullSecrets:
+        - name: beijing
+      containers:
+        - image: registry.cn-beijing.aliyuncs.com/kaoyaya/fe-wap:dev
+          name: fe-wap
+          ports:
+            - containerPort: 80
+          imagePullPolicy: Always
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30

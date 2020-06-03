@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+  labels:
+    app: website-news-kaoyaya
+  name: website-news-kaoyaya
+spec:
+  rules:
+    - host: 'news.kyy.com'
+      http:
+        paths:
+          - backend:
+              serviceName: website-news-kaoyaya
+              servicePort: 80
+            path: /news

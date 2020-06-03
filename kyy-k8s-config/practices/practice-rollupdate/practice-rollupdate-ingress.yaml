@@ -1,0 +1,21 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  labels:
+    app: practice-rollupdate
+  name: practice-rollupdate-ingress
+spec:
+  rules:
+    - host: "*.kaoyaya.com" # https 必须指定域名
+      http:
+        paths:
+          - backend:
+              serviceName: practice-rollupdate
+              servicePort: 80
+            path: /nginx/
+    - http:
+        paths:
+          - backend:
+              serviceName: practice-rollupdate
+              servicePort: 80
+            path: /nginx/

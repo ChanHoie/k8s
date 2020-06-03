@@ -1,0 +1,15 @@
+jenkins:
+  image: 'jenkins/jenkins:lts'
+  expose:
+    - 50000/tcp
+    - 8080/tcp
+  restart: always
+  cpu_shares: 200
+  labels:
+    aliyun.routing.port_8080: http://ci.kaoyaya.com;https://ci.kaoyaya.com
+    aliyun.log_store_dbstdout: stdout
+    aliyun.log_ttl_dbstdout: 30
+  environment:
+        - JAVA_OPTS=-Duser.timezone=Asia/Shanghai
+  volumes:
+    - 'jenkins_home:/var/jenkins_home'

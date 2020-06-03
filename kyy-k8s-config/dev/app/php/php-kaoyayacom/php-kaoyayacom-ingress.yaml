@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  labels:
+    app: php-kaoyayacom
+  name: php-kaoyayacom
+  annotations:
+    nginx.ingress.kubernetes.io/server-alias: "zckjpx.kuaixuezaixian.com,caishidian.kuaixuezaixian.com"
+spec:
+  rules:
+    - host: "www.kuaixuezaixian.com"
+      http:
+        paths:
+          - backend:
+              serviceName: php-kaoyayacom
+              servicePort: 80

@@ -1,0 +1,37 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: website-news-kaoyaya
+  name: website-news-kaoyaya
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: website-news-kaoyaya
+    spec:
+      containers:
+        - env:
+            - name: WORDPRESS_DB_HOST
+              value: rm-2zeb1f93086857hv0.mysql.rds.aliyuncs.com
+            - name: WORDPRESS_DB_NAME
+              value: news_kaoyaya
+            - name: WORDPRESS_DB_PASSWORD
+              value: bN8dH6g2uWgC
+            - name: WORDPRESS_DB_USER
+              value: news_kaoyaya
+          image: wordpress:php7.3
+          name: website-news-kaoyaya
+          ports:
+            - containerPort: 80
+          resources: {}
+          volumeMounts:
+            - name: news-kaoyaya-pv-oss
+              mountPath: "/var/www/html/wp-content"
+      restartPolicy: Always
+      volumes:
+        - name: news-kaoyaya-pv-oss
+          persistentVolumeClaim:
+            claimName: news-kaoyaya-pv-oss

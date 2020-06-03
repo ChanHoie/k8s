@@ -1,0 +1,30 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: taxation-server
+  name: taxation-server
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: taxation-server
+    spec:
+      containers:
+        - env:
+            - name: ADDRESS
+              value: 0.0.0.0:3002
+            - name: DATABASE_HOST
+              value: test.server.kaoyaya.com
+            - name: DATABASE_NAME
+              value: taxation
+            - name: DATABASE_PASSWORD
+              value: '!Nd1Gt6IgddAu'
+            - name: DATABASE_USER
+              value: taxation
+          image: registry.cn-qingdao.aliyuncs.com/kaoyaya/taxation-service
+          name: taxation-server
+          resources: {}
+      restartPolicy: Always

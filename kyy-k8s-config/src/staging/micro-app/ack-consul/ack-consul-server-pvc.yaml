@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  annotations:
+    control-plane.alpha.kubernetes.io/leader: >-
+      {"holderIdentity":"212f1240-a15e-11e9-bc24-4e88964fc968","leaseDurationSeconds":15,"acquireTime":"2019-07-09T05:26:50Z","renewTime":"2019-07-09T05:26:52Z","leaderTransitions":0}
+    pv.kubernetes.io/bind-completed: 'yes'
+    pv.kubernetes.io/bound-by-controller: 'yes'
+    volume.beta.kubernetes.io/storage-provisioner: alicloud/disk
+  finalizers:
+    - kubernetes.io/pvc-protection
+  labels:
+    app: ack-consul
+    chart: ack-consul-0.5.0
+    component: server
+    hasDNS: 'true'
+    release: consul
+  name: data-ack-consul-server-0
+  namespace: default
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi
+  storageClassName: alicloud-disk-efficiency
+  volumeName: d-2zedfbuqicsba841ehwg
+

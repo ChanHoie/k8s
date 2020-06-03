@@ -1,0 +1,11 @@
+# https://kubernetes.io/docs/tasks/run-application/configure-pdb/
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: example-pdb
+spec:
+  #  minAvailable: 2
+  maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: fe-admin

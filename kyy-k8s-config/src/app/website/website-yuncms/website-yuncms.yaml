@@ -1,0 +1,21 @@
+kyy_yuncms:
+  image: registry.cn-qingdao.aliyuncs.com/kaoyaya/yuncms
+  ports:
+    - '80'
+  restart: always
+  labels:
+    aliyun.proxy.port_80: "http://www.kaoyaya.cn"
+    aliyun.proxy.VIRTUAL_HOST_WEIGHT: '26'
+  environment:
+    - DB_HOST=rm-2zeb1f93086857hv0.mysql.rds.aliyuncs.com
+    - DB_PORT=3306
+    - DB_DATABASE=kaoyaya_yuncms
+    - DB_USER=kyy_yuncms
+    - DB_PASSWORD=4PYmsab4Ukyh
+    - REDIS_HOST=r-2ze6269f42e1f8c4.redis.rds.aliyuncs.com
+    - REDIS_PORT=6379
+    - REDIS_AUTH=9V3zrtA338ULq6N7s2
+    - WXMSG_RECEIVE=http://php-kaoyayacom
+    - KAOYAYA_DB_URI=mysql://kyy_master:tdHRdT7V2o4d@rm-2ze8m2daqb051wp49.mysql.rds.aliyuncs.com/sq_kaoyaya
+  external_links:
+    - "php-kaoyayacom"

@@ -1,0 +1,89 @@
+±apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: go-api
+  name: go-api
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: go-api
+    spec:
+      imagePullSecrets:
+        - name: beijing
+      containers:
+        - args:
+            - --registry_address=consul-server-bootstrap:8500
+          env:
+            - name: DATABASE_HOST
+              value: 192.168.3.220:33006
+            - name: DATABASE_NAME
+              value: kaoyayacn
+            - name: DATABASE_PASSWORD
+              value: kaoyayacom2017
+            - name: DATABASE_USER
+              value: root
+            - name: MASTER_DB_HOST
+              value: 192.168.3.220:33006
+            - name: MASTER_DB_NAME
+              value: sq_kaoyaya
+            - name: MASTER_DB_PASSWORD
+              value: kaoyayacom2017
+            - name: MASTER_DB_USER
+              value: root
+            - name: QUESTION_DB_HOST
+              value: 192.168.3.220:33006
+            - name: QUESTION_DB_NAME
+              value: question
+            - name: QUESTION_DB_PASSWORD
+              value: kaoyayacom2017
+            - name: QUESTION_DB_USER
+              value: root
+            - name: REDIS_AUTH
+              value: ""
+            - name: REDIS_HOST
+              value: redis:6379
+            - name: WECHAT_DB_HOST
+              value: 192.168.3.220:33006
+            - name: WECHAT_DB_NAME
+              value: wechat
+            - name: WECHAT_DB_PASSWORD
+              value: kaoyayacom2017
+            - name: WECHAT_DB_USER
+              value: wechat
+            - name: MAXCOMPUTE_DB_HOST
+              value: 192.168.3.220:3306
+            - name: MAXCOMPUTE_DB_NAME
+              value: bdp
+            - name: MAXCOMPUTE_DB_PASSWORD
+              value: kaoyayacom2017
+            - name: MAXCOMPUTE_DB_USER
+              value: root
+            - name: WORDPRESS_DB_HOST
+              value: 192.168.3.220:33006
+            - name: WORDPRESS_DB_NAME
+              value: news_kaoyaya
+            - name: WORDPRESS_DB_PASSWORD
+              value: kaoyayacom2017
+            - name: WORDPRESS_DB_USER
+              value: root
+            - name: ELASTICESEARCH_HOST
+              value: http://es-cn-v641as3ia000ywj5h.public.elasticsearch.aliyuncs.com:9200/
+            - name: ELASTICESEARCH_USERNAME
+              value: elastic
+            - name: ELASTICESEARCH_PASSWORD
+              value: f3VDp3qbQep9
+            - name: PORT
+              value: "80"
+            - name: RUN_MODE
+              value: dev
+          image: registry.cn-beijing.aliyuncs.com/kaoyaya-micro/api-web:dev
+          name: go-api
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          resources: {}
+      restartPolicy: Always

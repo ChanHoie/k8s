@@ -1,0 +1,26 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: chatbot-server
+  name: chatbot-server
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: chatbot-server
+    spec:
+      containers:
+      - env:
+        - name: GPG_KEY
+          value: 0D96DF4D4110E5C43FBFB17F2D347EA6AA65421D
+        - name: LANG
+          value: C.UTF-8
+        image: registry.cn-qingdao.aliyuncs.com/kaoyaya/chat-bot:latest
+        name: chatbot-server
+        ports:
+        - containerPort: 5000
+        resources: {}
+      restartPolicy: Always

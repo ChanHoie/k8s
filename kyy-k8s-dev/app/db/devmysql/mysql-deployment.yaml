@@ -1,0 +1,27 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: dev-mysql
+  name: dev-mysql
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: dev-mysql
+    spec:
+      hostNetwork: true
+      spec:
+      containers:
+        - image: mysql:5.6
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: root
+          name: dev-mysql
+          ports:
+            - containerPort: 3306
+          imagePullPolicy: Always
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30

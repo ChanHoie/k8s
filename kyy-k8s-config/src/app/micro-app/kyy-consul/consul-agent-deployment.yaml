@@ -1,0 +1,22 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: consul-agent
+  name: consul-agent
+spec:
+  replicas: 3
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: consul-agent
+    spec:
+      containers:
+        - args:
+            - -retry-join
+            - consul-server-bootstrap
+          image: registry.cn-qingdao.aliyuncs.com/kaoyaya-micro/consul:latest
+          name: consul-agent
+          resources: {}
+      restartPolicy: Always

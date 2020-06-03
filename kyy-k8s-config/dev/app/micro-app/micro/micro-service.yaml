@@ -1,0 +1,20 @@
+# Source: ack-consul/templates/server-service.yaml
+# Headless service for Consul server DNS entries. This service should only
+# point to Consul servers. For access to an agent, one should assume that
+# the agent is installed locally on the node and the NODE_IP should be used.
+# If the node can't run a Consul agent, then this service can be used to
+# communicate directly to a server agent.
+apiVersion: v1
+kind: Service
+metadata:
+  name: micro
+  namespace: default
+  labels:
+    app: micro
+spec:
+  selector:
+    app: micro
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080

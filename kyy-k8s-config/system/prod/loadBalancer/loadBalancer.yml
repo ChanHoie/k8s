@@ -1,0 +1,26 @@
+# http 类型的负责均衡
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    service.beta.kubernetes.io/alicloud-loadbalancer-protocol-port: 'http:80'
+    service.beta.kubernetes.io/alicloud-loadbalancer-address-type: 'intranet'
+    service.beta.kubernetes.io/alicloud-loadbalancer-id: 'lb-2ze0g1zsgp334vrxnaxrv' # 复用已存在的 slb
+    service.beta.kubernetes.io/alicloud-loadbalancer-force-override-listeners: 'true'
+  name: nginx-ingress-lb
+  labels:
+    app: nginx-ingress-lb
+  namespace: kube-system
+spec:
+  ports:
+    - port: 80
+      name: http80
+      protocol: TCP
+      targetPort: 80
+    - port: 443
+      name: http443
+      protocol: TCP
+      targetPort: 443
+  selector:
+    run: nginx
+  type: LoadBalancer

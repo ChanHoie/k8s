@@ -1,0 +1,12 @@
+taxation-server:
+  image: registry.cn-qingdao.aliyuncs.com/kaoyaya/taxation-service
+  restart: always
+  hostname: taxation-server
+  labels:
+    aliyun.logs: /var/log
+  environment:
+    - ADDRESS=0.0.0.0:3002
+    - DATABASE_HOST=test.server.kaoyaya.com
+    - DATABASE_NAME=taxation
+    - DATABASE_USER=taxation
+    - DATABASE_PASSWORD=!Nd1Gt6IgddAu

@@ -1,0 +1,19 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: go-api
+spec:
+  type: ClusterIP
+  ports:
+    - port: 9999
+      targetPort: 9999
+---
+kind: Endpoints
+apiVersion: v1
+metadata:
+  name: go-api
+subsets:
+  - addresses:
+      - ip: 192.168.1.8
+    ports:
+      - port: 9999

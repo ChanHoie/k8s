@@ -1,0 +1,15 @@
+# Source: ack-consul/templates/server-config-configmap.yaml
+# StatefulSet to run the actual Consul server cluster.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ack-consul-server-config
+  namespace: default
+  labels:
+    app: ack-consul
+    chart: ack-consul-0.5.0
+    heritage: Tiller
+    release: consul
+data:
+  extra-from-values.json: |-
+    {}

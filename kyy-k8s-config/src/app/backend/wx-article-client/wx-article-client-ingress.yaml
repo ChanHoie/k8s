@@ -1,0 +1,14 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  labels:
+    app: wx-article-client
+  name: wx-article-client
+spec:
+  rules:
+    - host: wxmp.kaoyaya.com
+      http:
+        paths:
+          - backend:
+              serviceName: wx-article-client
+              servicePort: 8080

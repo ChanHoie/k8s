@@ -1,0 +1,21 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: mkaoyaya
+  name: mkaoyaya
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: mkaoyaya
+    spec:
+      containers:
+        - image: registry.cn-qingdao.aliyuncs.com/kaoyaya/mkaoyaya
+          name: mkaoyaya
+          ports:
+            - containerPort: 8080
+          resources: {}
+      restartPolicy: Always

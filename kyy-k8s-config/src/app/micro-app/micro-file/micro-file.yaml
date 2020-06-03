@@ -1,0 +1,14 @@
+micro-file:
+  command:
+    - '--registry_address=consul-server-bootstrap:8500'
+  image: registry.cn-qingdao.aliyuncs.com/kaoyaya-micro/file:latest
+  restart: always
+  environment:
+    - DATABASE_HOST=rm-2ze8m2daqb051wp49.mysql.rds.aliyuncs.com
+    - DATABASE_NAME=sq_kaoyaya
+    - DATABASE_USER=kyy_master
+    - DATABASE_PASSWORD=tdHRdT7V2o4d
+    - MASTER_DB_HOST=rm-2ze8m2daqb051wp49.mysql.rds.aliyuncs.com
+    - MASTER_DB_NAME=sq_kaoyaya
+    - MASTER_DB_USER=kyy_master
+    - MASTER_DB_PASSWORD=tdHRdT7V2o4d

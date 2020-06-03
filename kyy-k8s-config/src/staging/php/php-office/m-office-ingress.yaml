@@ -1,0 +1,14 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  labels:
+    app: m-office
+  name: m-office
+spec:
+  rules:
+    - host: m.0791office.cn
+      http:
+        paths:
+          - backend:
+              serviceName: m-office
+              servicePort: 80

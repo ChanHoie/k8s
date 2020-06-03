@@ -1,0 +1,11 @@
+micro-comment:
+  command:
+    - '--registry_address=consul-server-bootstrap:8500'
+  image: 'registry.cn-qingdao.aliyuncs.com/kaoyaya-micro/comment:latest'
+  restart: always
+  environment:
+    - MASTER_DB_HOST=rm-2ze8m2daqb051wp49.mysql.rds.aliyuncs.com
+    - MASTER_DB_NAME=sq_kaoyaya
+    - MASTER_DB_USER=kyy_master
+    - MASTER_DB_PASSWORD=tdHRdT7V2o4d
+  name: comment

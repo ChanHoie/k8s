@@ -1,0 +1,29 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    aliyun.proxy.VIRTUAL_HOST_WEIGHT: "28"
+    aliyun.routing.port_80: http://www.kaoyaya.com/tiku/wap/
+    kompose.cmd: kompose-darwin-amd64 convert -f fe-tiku-v2-wap.yaml
+    kompose.version: 1.17.0 (70e82c92)
+
+  labels:
+    app: fe-tiku-v2-wap
+  name: fe-tiku-v2-wap
+spec:
+  replicas: 4
+  strategy: {}
+  template:
+    metadata:
+
+      labels:
+        app: fe-tiku-v2-wap
+    spec:
+      containers:
+        - image: registry-vpc.cn-beijing.aliyuncs.com/kaoyaya/fe-tiku-v2-wap
+          name: fe-tiku-v2-wap
+          ports:
+            - containerPort: 80
+          resources: {}
+      restartPolicy: Always
+status: {}

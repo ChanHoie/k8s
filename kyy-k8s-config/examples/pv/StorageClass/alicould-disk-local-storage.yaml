@@ -1,0 +1,15 @@
+# 本地数据卷
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"storage.k8s.io/v1","kind":"StorageClass","metadata":{"annotations":{},"name":"alicloud-disk-local-storage"},"parameters":{"type":"cloud_efficiency"},"provisioner":"alicloud/disk"}
+  name: alicloud-disk-local-storage
+parameters:
+  type: cloud_efficiency
+  regionid: cn-beijing
+  zoneid: cn-beijing-f,cn-beijing-g,cn-beijing-h # 可用区设置
+provisioner: alicloud/disk
+reclaimPolicy: Retain
+volumeBindingMode: WaitForFirstConsumer

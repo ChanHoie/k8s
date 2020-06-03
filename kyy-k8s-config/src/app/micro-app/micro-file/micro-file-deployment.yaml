@@ -1,0 +1,39 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: micro-file
+  name: micro-file
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: micro-file
+    spec:
+      containers:
+        - args:
+            - --registry_address=consul-server-bootstrap:8500
+          env:
+            - name: DATABASE_HOST
+              value: rm-2ze8m2daqb051wp49.mysql.rds.aliyuncs.com
+            - name: DATABASE_NAME
+              value: sq_kaoyaya
+            - name: DATABASE_PASSWORD
+              value: tdHRdT7V2o4d
+            - name: DATABASE_USER
+              value: kyy_master
+            - name: MASTER_DB_HOST
+              value: rm-2ze8m2daqb051wp49.mysql.rds.aliyuncs.com
+            - name: MASTER_DB_NAME
+              value: sq_kaoyaya
+            - name: MASTER_DB_PASSWORD
+              value: tdHRdT7V2o4d
+            - name: MASTER_DB_USER
+              value: kyy_master
+          image: registry.cn-qingdao.aliyuncs.com/kaoyaya-micro/file
+          imagePullPolicy: Always
+          name: micro-file
+          resources: {}
+      restartPolicy: Always

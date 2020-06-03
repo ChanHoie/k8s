@@ -1,0 +1,60 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: mq-order-open-services
+  name: mq-order-open-services
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: mq-order-open-services
+    spec:
+      imagePullSecrets:
+        - name: beijing
+      containers:
+        - env:
+            - name: DATABASE_HOST
+              value: 192.168.3.220:33006
+            - name: DATABASE_NAME
+              value: kaoyayacn
+            - name: DATABASE_PASSWORD
+              value: kaoyayacom2017
+            - name: DATABASE_USER
+              value: root
+            - name: MASTER_DB_HOST
+              value: 192.168.3.220:33006
+            - name: MASTER_DB_NAME
+              value: sq_kaoyaya
+            - name: MASTER_DB_PASSWORD
+              value: kaoyayacom2017
+            - name: MASTER_DB_USER
+              value: root
+            - name: QUESTION_DB_HOST
+              value: 192.168.3.220:33006
+            - name: QUESTION_DB_NAME
+              value: question
+            - name: QUESTION_DB_PASSWORD
+              value: kaoyayacom2017
+            - name: QUESTION_DB_USER
+              value: root
+            - name: REDIS_AUTH
+              value: ""
+            - name: REDIS_HOST
+              value: redis:6379
+            - name: WECHAT_DB_HOST
+              value: 192.168.3.220:33006
+            - name: WECHAT_DB_NAME
+              value: wechat
+            - name: WECHAT_DB_PASSWORD
+              value: kaoyayacom2017
+            - name: WECHAT_DB_USER
+              value: wechat
+            - name: RUN_MODE
+              value: dev
+          image: registry.cn-beijing.aliyuncs.com/kaoyaya-micro/open-services:v2.9
+          name: mq-order-open-services
+          resources: {}
+      restartPolicy: Always

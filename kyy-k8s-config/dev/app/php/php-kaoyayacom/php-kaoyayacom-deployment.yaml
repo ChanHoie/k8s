@@ -1,0 +1,75 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: php-kaoyayacom
+  name: php-kaoyayacom
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: php-kaoyayacom
+    spec:
+      imagePullSecrets:
+        - name: beijing
+      containers:
+        - env:
+            - name: DOCUMENTROOT
+              value: /var/www/html/kaoyayacn/
+            - name: APP_DEBUG
+              value: "true"
+            - name: APP_ENV
+              value: local
+            - name: COMMENT_SERVER_URL
+              value: http://comments-service:3009
+            - name: DB_DATABASE
+              value: sq_kaoyaya
+            - name: DB_HOST
+              value: 192.168.3.220
+            - name: DB_PASSWORD
+              value: kaoyayacom2017
+            - name: DB_PORT
+              value: "33006"
+            - name: DB_USER
+              value: root
+            - name: DOMAIN_NAME
+              value: www.kuaixuezaixian.com
+            - name: KNOWLEDGE_SERVER_URL
+              value: http://knowledge-service:3007
+            - name: LOAD_IP
+              value: 139.129.76.120
+            - name: MESSAGE_SERVER_URI
+              value: http://192.168.3.220:8011
+            - name: MICRO_SERVER_URL
+              value: http://micro:8080/rpc
+            - name: REDIS_AUTH
+              value: root
+            - name: REDIS_HOST
+              value: redis
+            - name: REDIS_PORT
+              value: "6379"
+            - name: SMS_SERVER_URL
+              value: http://sms-service:3005
+            - name: SOCKET_OP
+              value: 112.126.99.74
+            - name: SOCKET_URL
+              value: wss://wxws.kaoyaya.com
+            - name: TAX_IP
+              value: taxation-server
+            - name: THINK_LOG_PATH
+              value: /website/htdocs/kaoyayacn/Logs
+            - name: VOUCHER_SERVER_URL
+              value: http://voucher-service:3003
+            - name: WECHAT_DB_CONFIG
+              value: mysql://root:kaoyayacom2017@112.126.99.74:33006/wechat#utf8
+            - name: WX_ARTICLEIP
+              value: wx-article-server
+          image: registry.cn-beijing.aliyuncs.com/kaoyaya/kaoyayacn:dev
+          name: php-kaoyayacom
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          resources: {}
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30

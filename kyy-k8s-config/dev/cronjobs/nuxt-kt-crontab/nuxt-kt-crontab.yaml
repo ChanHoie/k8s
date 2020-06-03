@@ -1,0 +1,44 @@
+# 定时开放考题
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: nuxt-kt-crontab
+  labels:
+    app: nuxt-kt-crontab
+spec:
+  concurrencyPolicy: Forbid
+  schedule: "*/10 * * * *"
+  successfulJobsHistoryLimit: 1
+  suspend: false
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    metadata:
+      labels:
+        app: nuxt-kt-crontab
+    spec:
+      template:
+        spec:
+          imagePullSecrets:
+            - name: beijing
+          containers:
+            - env:
+                - name: MASTER_DB_HOST
+                  value: 192.168.3.220:33006
+                - name: MASTER_DB_NAME
+                  value: sq_kaoyaya
+                - name: MASTER_DB_PASSWORD
+                  value: kaoyayacom2017
+                - name: MASTER_DB_USER
+                  value: root
+                - name: QUESTION_DB_HOST
+                  value: 192.168.3.220:33006
+                - name: QUESTION_DB_NAME
+                  value: question
+                - name: QUESTION_DB_PASSWORD
+                  value: kaoyayacom2017
+                - name: QUESTION_DB_USER
+                  value: root
+              image: registry.cn-beijing.aliyuncs.com/kaoyaya-micro/nuxt-kt-crontab:latest
+              name: nuxt-kt-crontab
+              resources: {}
+          restartPolicy: Never

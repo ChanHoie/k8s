@@ -1,0 +1,20 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  labels:
+    app: wechat-web
+  name: wechat-web
+spec:
+  rules:
+    - host: wechat.kaoyaya.com
+      http:
+        paths:
+          - backend:
+              serviceName: wechat-web
+              servicePort: 80
+    - host: wechat2.kaoyaya.com
+      http:
+        paths:
+          - backend:
+              serviceName: wechat-web
+              servicePort: 80

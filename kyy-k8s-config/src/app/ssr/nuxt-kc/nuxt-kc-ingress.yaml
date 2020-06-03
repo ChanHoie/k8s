@@ -1,0 +1,20 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  labels:
+    app: nuxt-kc
+  name: nuxt-kc
+spec:
+  rules:
+    - host: '*.kaoyaya.com'
+      http:
+        paths:
+          - backend:
+              serviceName: nuxt-kc
+              servicePort: 3000
+            path: /kc/
+          - backend:
+              serviceName: go-api
+              servicePort: 80
+            path: /api/v1/
+

@@ -1,0 +1,99 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: go-admin
+  name: go-admin
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: go-admin
+    spec:
+      imagePullSecrets:
+        - name: qingdao
+      containers:
+        - name: go-admin
+          env:
+            - name: DATABASE_HOST
+              value: 112.126.99.74:33006
+            - name: DATABASE_NAME
+              value: kaoyayacn
+            - name: DATABASE_PASSWORD
+              value: kaoyayacom2017
+            - name: DATABASE_USER
+              value: root
+            - name: ELASTICESEARCH_HOST
+              value: http://elasticsearch:9200
+            - name: MASTER_DB_HOST
+              value: 112.126.99.74:33006
+            - name: MASTER_DB_NAME
+              value: sq_kaoyaya
+            - name: MASTER_DB_PASSWORD
+              value: kaoyayacom2017
+            - name: MASTER_DB_USER
+              value: root
+            - name: QUESTION_DB_HOST
+              value: 112.126.99.74:33006
+            - name: QUESTION_DB_NAME
+              value: question
+            - name: QUESTION_DB_PASSWORD
+              value: kaoyayacom2017
+            - name: QUESTION_DB_USER
+              value: root
+            - name: REDIS_AUTH
+              value: ""
+            - name: REDIS_HOST
+              value: 192.168.118.174:6379
+            - name: WECHAT_DB_HOST
+              value: 112.126.99.74:33006
+            - name: WECHAT_DB_NAME
+              value: wechat
+            - name: WECHAT_DB_PASSWORD
+              value: kaoyayacom2017
+            - name: WECHAT_DB_USER
+              value: root
+            - name: MAXCOMPUTE_DB_HOST
+              value: 112.126.99.74:3306
+            - name: MAXCOMPUTE_DB_NAME
+              value: bdp
+            - name: MAXCOMPUTE_DB_PASSWORD
+              value: kaoyayacom2017
+            - name: MAXCOMPUTE_DB_USER
+              value: root
+            - name: PORT
+              value: "80"
+            - name: SOCKET_SERVICE
+              value: wechat-im-socket:8000
+            - name: SOCKET_URL
+              value: ws://wxws.kuaixuezaixian.com
+            - name: RUN_MODE
+              value: dev
+          image: registry.cn-qingdao.aliyuncs.com/kaoyaya-micro/admin:dev
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          resources: {}
+      restartPolicy: Always
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    aliyun.log_store_dbstdout: stdout
+    aliyun.routing.port_80: http://www.kaoyaya.com/admin/api/
+    kompose.cmd: kompose-darwin-amd64 convert -f go-admin.yaml
+    kompose.version: 1.17.0 (70e82c92)
+  labels:
+    app: go-admin
+  name: go-admin
+spec:
+  ports:
+    - name: "80"
+      port: 80
+      targetPort: 80
+  selector:
+    app: go-admin

@@ -1,0 +1,24 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: wx-article-client
+  name: wx-article-client
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: wx-article-client
+    spec:
+      containers:
+        - env:
+            - name: WX_ARTICLE_IP
+              value: wx-article-server
+          image: registry.cn-qingdao.aliyuncs.com/kaoyaya/wx-article-client:latest
+          name: wx-article-client
+          ports:
+            - containerPort: 8080
+          resources: {}
+      restartPolicy: Always

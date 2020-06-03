@@ -1,0 +1,22 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: fe-admin
+  name: fe-admin
+spec:
+  replicas: 4
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: fe-admin
+    spec:
+      containers:
+        - name: fe-admin
+          image: registry.cn-beijing.aliyuncs.com/kaoyaya/fe-admin
+          ports:
+            - containerPort: 80
+          resources: {}
+          imagePullPolicy: Always
+      restartPolicy: Always

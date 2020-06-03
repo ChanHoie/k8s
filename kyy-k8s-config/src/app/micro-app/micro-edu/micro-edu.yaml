@@ -1,0 +1,16 @@
+micro-edu:
+  image: 'registry.cn-qingdao.aliyuncs.com/kaoyaya-micro/edu:latest'
+  command:
+    - '--registry_address=consul-server-bootstrap:8500'
+  restart: always
+  environment:
+    - RUN_MODE=production
+    - DATABASE_HOST=${MASTER_DB_HOST}
+    - DATABASE_NAME=${MASTER_DB_NAME}
+    - DATABASE_USER=${MASTER_DB_USER}
+    - DATABASE_PASSWORD=${MASTER_DB_PASSWORD}
+    - MASTER_DB_HOST=${MASTER_DB_HOST}
+    - MASTER_DB_NAME=${MASTER_DB_NAME}
+    - MASTER_DB_USER=${MASTER_DB_USER}
+    - MASTER_DB_PASSWORD=${MASTER_DB_PASSWORD}
+    - constraint:aliyun.node_index!=1

@@ -1,0 +1,42 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: website-yuncms
+  name: website-yuncms
+spec:
+  replicas: 1 # 用 session 问题,只能部署一个
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: website-yuncms
+    spec:
+      containers:
+        - env:
+            - name: DB_DATABASE
+              value: kaoyaya_yuncms
+            - name: DB_HOST
+              value: rm-2zeb1f93086857hv0.mysql.rds.aliyuncs.com
+            - name: DB_PASSWORD
+              value: 4PYmsab4Ukyh
+            - name: DB_PORT
+              value: "3306"
+            - name: DB_USER
+              value: kyy_yuncms
+            - name: KAOYAYA_DB_URI
+              value: mysql://kyy_master:tdHRdT7V2o4d@rm-2ze8m2daqb051wp49.mysql.rds.aliyuncs.com/sq_kaoyaya
+            - name: REDIS_AUTH
+              value: 9V3zrtA338ULq6N7s2
+            - name: REDIS_HOST
+              value: r-2ze6269f42e1f8c4.redis.rds.aliyuncs.com
+            - name: REDIS_PORT
+              value: "6379"
+            - name: WXMSG_RECEIVE
+              value: http://php-kaoyayacom
+          image: registry.cn-qingdao.aliyuncs.com/kaoyaya/yuncms
+          name: website-yuncms
+          ports:
+            - containerPort: 80
+          resources: {}
+      restartPolicy: Always

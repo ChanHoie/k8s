@@ -1,0 +1,14 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  labels:
+    app: cpa
+  name: cpa
+spec:
+  rules:
+    - host: www.xueacc.com
+      http:
+        paths:
+          - backend:
+              serviceName: cpa
+              servicePort: 80

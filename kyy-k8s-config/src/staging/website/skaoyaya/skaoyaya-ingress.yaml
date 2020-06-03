@@ -1,0 +1,14 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  labels:
+    app: skaoyaya
+  name: skaoyaya
+spec:
+  rules:
+    - host: s.kaoyaya.com
+      http:
+        paths:
+          - backend:
+              serviceName: skaoyaya
+              servicePort: 80

@@ -1,0 +1,14 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  labels:
+    app: api-client
+  name: api-client
+spec:
+  rules:
+    - host: api.kaoyaya.com
+      http:
+        paths:
+          - backend:
+              serviceName: api-client
+              servicePort: 80

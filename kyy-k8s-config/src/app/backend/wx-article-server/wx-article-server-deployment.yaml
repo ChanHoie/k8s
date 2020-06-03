@@ -1,0 +1,32 @@
+# 小程序服务端
+
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: wx-article-server
+  name: wx-article-server
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: wx-article-server
+    spec:
+      containers:
+        - env:
+            - name: DATABASE_HOST
+              value: 112.126.99.74
+            - name: DATABASE_NAME
+              value: wxapp
+            - name: DATABASE_PASSWORD
+              value: kaoyayacom2017
+            - name: DATABASE_USER
+              value: root
+          image: registry.cn-qingdao.aliyuncs.com/kaoyaya/wx-article-server:latest
+          name: wx-article-server
+          ports:
+            - containerPort: 9090
+          resources: {}
+      restartPolicy: Always

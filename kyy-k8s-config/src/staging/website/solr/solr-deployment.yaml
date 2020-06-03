@@ -1,0 +1,24 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: solr-service
+  name: solr-service
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+
+      labels:
+        app: solr-service
+    spec:
+      containers:
+      - image: registry.cn-qingdao.aliyuncs.com/kaoyaya/solr
+        name: solr-service
+        resources: {}
+        ports:
+          - containerPort: 8983
+      restartPolicy: Always
+
+status: {}

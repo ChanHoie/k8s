@@ -1,0 +1,22 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  labels:
+    app: fe-tiku-v2-pc
+  name: fe-tiku-v2-pc
+spec:
+  rules:
+    - host: '*.kaoyaya.com'
+      http:
+        paths:
+          - backend:
+              serviceName: fe-tiku-v2-pc
+              servicePort: 80
+            path: /tiku/v2/pc/
+    - http:
+        paths:
+          - backend:
+              serviceName: fe-tiku-v2-pc
+              servicePort: 80
+            path: /tiku/v2/pc/
+

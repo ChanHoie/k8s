@@ -1,0 +1,49 @@
+# 账号管理脚本
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  labels:
+    app: order-bill
+  name: order-bill
+spec:
+  concurrencyPolicy: Forbid
+  schedule: "0 4 * * *"
+  successfulJobsHistoryLimit: 1
+  suspend: false
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    metadata:
+      labels:
+        app: order-bill
+    spec:
+      template:
+        metadata:
+          labels:
+            app: order-bill
+        spec:
+          containers:
+            - env:
+                - name: DATABASE_HOST
+                  value: test.server.kaoyaya.com:3306
+                - name: DATABASE_NAME
+                  value: bdp
+                - name: DATABASE_PASSWORD
+                  value: kaoyayacom2017
+                - name: DATABASE_USER
+                  value: root
+                - name: MASTER_DB_HOST
+                  value: rm-2ze8m2daqb051wp49.mysql.rds.aliyuncs.com
+                - name: MASTER_DB_NAME
+                  value: sq_kaoyaya
+                - name: MASTER_DB_PASSWORD
+                  value: tdHRdT7V2o4d
+                - name: MASTER_DB_USER
+                  value: kyy_master
+                - name: PORT
+                  value: "80"
+                - name: RUN_MODE
+                  value: production
+              image: registry.cn-qingdao.aliyuncs.com/kaoyaya-micro/order-bill:0701
+              name: order-bill
+              resources: {}
+          restartPolicy: Never

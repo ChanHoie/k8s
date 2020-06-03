@@ -1,0 +1,11 @@
+mq-order-open-services:
+  image: 'registry.cn-qingdao.aliyuncs.com/kaoyaya-micro/open-services:latest'
+  restart: always
+  environment:
+    - MASTER_DB_HOST=rm-2ze8m2daqb051wp49.mysql.rds.aliyuncs.com
+    - MASTER_DB_NAME=sq_kaoyaya
+    - MASTER_DB_USER=kyy_master
+    - MASTER_DB_PASSWORD=tdHRdT7V2o4d
+    - REDIS_HOST=r-2ze6269f42e1f8c4.redis.rds.aliyuncs.com:6379
+    - REDIS_AUTH=9V3zrtA338ULq6N7s2
+    - KAOYAYA=php-kaoyayacom

@@ -1,0 +1,45 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: consul-server
+  name: consul-server
+spec:
+  replicas: 2
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: consul-server
+    spec:
+      containers:
+        - args:
+            - -server
+            - -retry-join
+            - consul-server-bootstrap
+          image: registry.cn-qingdao.aliyuncs.com/kaoyaya-micro/consul:latest
+          name: consul-server
+          ports:
+            - containerPort: 8500
+              name: http
+              protocol: TCP
+            - containerPort: 8301
+              name: serflan
+              protocol: TCP
+            - containerPort: 8302
+              name: serfwan
+              protocol: TCP
+            - containerPort: 8300
+              name: server
+              protocol: TCP
+            - containerPort: 8600
+              name: dns-tcp
+              protocol: TCP
+            - containerPort: 8600
+              name: dns-udp
+              protocol: UDP
+            - containerPort: 53
+              name: dns-53
+              protocol: UDP
+          resources: {}
+      restartPolicy: Always

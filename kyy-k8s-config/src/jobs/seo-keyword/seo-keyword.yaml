@@ -1,0 +1,42 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  labels:
+    job-name: seo-keyword
+  name: seo-keyword
+  namespace: default
+spec:
+  backoffLimit: 6
+  completions: 1
+  parallelism: 1
+  template:
+    metadata:
+      labels:
+        job-name: seo-keyword
+    spec:
+      containers:
+        - env:
+            - name: QUESTION_DB_HOST
+              value: rm-2ze1284oau0bzbz97.mysql.rds.aliyuncs.com
+            - name: QUESTION_DB_NAME
+              value: question
+            - name: QUESTION_DB_PASSWORD
+              value: Nd1Gt6IgddAu
+            - name: QUESTION_DB_USER
+              value: kyy_question
+            - name: ELASTICESEARCH_HOST
+              value: http://es-cn-v641as3ia000ywj5h.public.elasticsearch.aliyuncs.com:9200/
+            - name: ELASTICESEARCH_USERNAME
+              value: elastic
+            - name: ELASTICESEARCH_PASSWORD
+              value: f3VDp3qbQep9
+          image: registry.cn-beijing.aliyuncs.com/kaoyaya-micro/seo-keyword:latest
+          imagePullPolicy: Always
+          name: seo-keyword
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Never
+      schedulerName: default-scheduler
+      securityContext: {}

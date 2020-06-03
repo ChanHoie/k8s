@@ -1,0 +1,21 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: cpa
+  name: cpa
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: cpa
+    spec:
+      containers:
+        - image: registry.cn-qingdao.aliyuncs.com/kaoyaya/cpa:latest
+          name: cpa
+          ports:
+            - containerPort: 80
+          resources: {}
+      restartPolicy: Always

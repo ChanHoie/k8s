@@ -1,0 +1,56 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  labels:
+    app: voucher-client
+  name: voucher-client
+spec:
+  replicas: 2
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: voucher-client
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: voucher-client
+    spec:
+      containers:
+        - env:
+            - name: ADDRESS
+              value: '0.0.0.0:80'
+            - name: REDIS_AUTH
+              value: 9V3zrtA338ULq6N7s2
+            - name: REDIS_HOST
+              value: 'r-2ze6269f42e1f8c4.redis.rds.aliyuncs.com:6379'
+            - name: VOUCHER_SERVER_URL
+              value: 'http://voucher-service:3003'
+          image: 'registry.cn-qingdao.aliyuncs.com/kaoyaya/voucher-client:latest'
+          imagePullPolicy: Always
+          name: voucher-client
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /
+              port: 80
+              scheme: HTTP
+            initialDelaySeconds: 3
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 31

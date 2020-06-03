@@ -1,0 +1,79 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    aliyun.logs: /var/log
+    aliyun.proxy.VIRTUAL_HOST: '*,http://*.accgg.com'
+    aliyun.proxy.VIRTUAL_HOST_WEIGHT: "1"
+    kompose.cmd: kompose-darwin-amd64 convert -f php-accgg-default.yaml
+    kompose.version: 1.17.0 (70e82c92)
+
+  labels:
+    app: php-accgg-default
+  name: php-accgg-default
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+
+      labels:
+        app: php-accgg-default
+    spec:
+      containers:
+      - env:
+        - name: APP_DEBUG
+          value: "false"
+        - name: COMMENT_SERVER_URL
+          value: http://comments-service:3009
+        - name: DB_DATABASE
+          value: sq_kaoyaya
+        - name: DB_HOST
+          value: rm-2ze8m2daqb051wp49.mysql.rds.aliyuncs.com
+        - name: DB_PASSWORD
+          value: tdHRdT7V2o4d
+        - name: DB_PORT
+          value: "3306"
+        - name: DB_USER
+          value: kyy_master
+        - name: DOCUMENTROOT
+          value: /var/www/html/kaoyayacn/
+        - name: DOMAIN_NAME
+          value: www.kaoyaya.com
+        - name: KNOWLEDGE_SERVER_URL
+          value: http://knowledge-service:3007
+        - name: LOAD_IP
+          value: 139.129.76.120
+        - name: MESSAGE_SERVER_URI
+          value: message-server
+        - name: MICRO_SERVER_URL
+          value: http://micro:8080/rpc
+        - name: RECORD_DB_CONN
+          value: mysql://kyy_question:Nd1Gt6IgddAu@rm-m5ergl6g598g1x711198.mysql.rds.aliyuncs.com/sq_kaoyaya#utf8
+        - name: REDIS_AUTH
+          value: 9V3zrtA338ULq6N7s2
+        - name: REDIS_HOST
+          value: r-2ze6269f42e1f8c4.redis.rds.aliyuncs.com
+        - name: REDIS_PORT
+          value: "6379"
+        - name: SMS_SERVER_URL
+          value: http://sms-service:3005
+        - name: SOCKET_OP
+          value: wechat-im-socket
+        - name: SOCKET_URL
+          value: wss://wxws.kaoyaya.com
+        - name: TAX_IP
+          value: taxation-server
+        - name: THINK_LOG_PATH
+          value: /var/www/html/kaoyayacn/TEMP
+        - name: VOUCHER_SERVER_URL
+          value: http://voucher-service:3003
+        - name: WECHAT_DB_CONFIG
+          value: mysql://kyy_yuncms:4PYmsab4Ukyh@rm-2zeb1f93086857hv0.mysql.rds.aliyuncs.com/wechat#utf8
+        - name: WX_ARTICLEIP
+          value: wx-article-server
+        image: registry.cn-qingdao.aliyuncs.com/kaoyaya/kaoyayacn
+        name: php-accgg-default
+        resources: {}
+      restartPolicy: Always
+status: {}

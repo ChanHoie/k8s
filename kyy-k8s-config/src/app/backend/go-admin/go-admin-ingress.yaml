@@ -1,0 +1,24 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  labels:
+    app: go-admin
+  name: go-admin
+  annotations:
+    ingress.kubernetes.io/proxy-body-size: "100M"
+spec:
+  rules:
+    - host: '*.kaoyaya.com' # https 必须单独指明
+      http:
+        paths:
+          - backend:
+              serviceName: go-admin
+              servicePort: 80
+            path: /admin/api/
+    - http:
+        paths:
+          - backend:
+              serviceName: go-admin
+              servicePort: 80
+            path: /admin/api/
+

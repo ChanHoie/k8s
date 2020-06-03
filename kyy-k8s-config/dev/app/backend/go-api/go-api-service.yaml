@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    aliyun.log_store_dbstdout: stdout
+    aliyun.rolling_updates: "true"
+    aliyun.rolling_updates.parallelism: "2"
+    aliyun.routing.port_80: http://www.kaoyaya.com/api/v1/
+    kompose.cmd: kompose-darwin-amd64 convert -f go-api.yaml
+    kompose.version: 1.17.0 (70e82c92)
+
+  labels:
+    app: go-api
+  name: go-api
+spec:
+  ports:
+    - name: "80"
+      port: 80
+      targetPort: 80
+  selector:
+    app: go-api

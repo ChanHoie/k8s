@@ -1,0 +1,62 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: go-page
+  name: go-page
+spec:
+  replicas: 2
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: go-page
+    spec:
+      containers:
+        - env:
+            - name: DATABASE_HOST
+              value: 112.126.99.74:33006
+            - name: DATABASE_NAME
+              value: kaoyayacn
+            - name: DATABASE_PASSWORD
+              value: kaoyayacom2017
+            - name: DATABASE_USER
+              value: root
+            - name: MASTER_DB_HOST
+              value: 112.126.99.74:33006
+            - name: MASTER_DB_NAME
+              value: sq_kaoyaya
+            - name: MASTER_DB_PASSWORD
+              value: kaoyayacom2017
+            - name: MASTER_DB_USER
+              value: root
+            - name: QUESTION_DB_HOST
+              value: 112.126.99.74:33006
+            - name: QUESTION_DB_NAME
+              value: question
+            - name: QUESTION_DB_PASSWORD
+              value: kaoyayacom2017
+            - name: QUESTION_DB_USER
+              value: root
+            - name: REDIS_AUTH
+              value: ""
+            - name: REDIS_HOST
+              value: 192.168.118.174:6379
+            - name: WECHAT_DB_HOST
+              value: 112.126.99.74:33006
+            - name: WECHAT_DB_NAME
+              value: wechat
+            - name: WECHAT_DB_PASSWORD
+              value: kaoyayacom2017
+            - name: WECHAT_DB_USER
+              value: wechat
+            - name: RUN_MODE
+              value: dev
+            - name: PORT
+              value: "80"
+          image: registry.cn-qingdao.aliyuncs.com/kaoyaya-micro/page:latest
+          name: go-page
+          ports:
+            - containerPort: 80
+          resources: {}
+      restartPolicy: Always

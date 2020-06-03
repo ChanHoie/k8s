@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-oss
+  labels:
+    alicloud-pvname: pv-oss
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteMany
+  storageClassName: oss
+  flexVolume:
+    driver: "alicloud/oss"
+    options:
+      bucket: "k8s-beijing-pvc"                       #请替换为您的Bucket名称
+      url: "k8s-beijing-pvc.oss-cn-beijing-internal.aliyuncs.com"    #请替换为您的URL
+      akId: "***"                            #请替换为您的akId
+      akSecret: "***"                        #请替换为您的akSecret
+      #otherOpts: "-o max_stat_cache_size=0 -o allow_other"   #请替换为您的otherOpts

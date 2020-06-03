@@ -1,0 +1,12 @@
+voucher-service:
+  image: registry.cn-qingdao.aliyuncs.com/kaoyaya/voucher-service
+  restart: always
+  hostname: voucher-service
+  labels:
+    aliyun.logs: /var/log
+  environment:
+    - ADDRESS=0.0.0.0:3003
+    - DATABASE_HOST=rm-2ze8m2daqb051wp49.mysql.rds.aliyuncs.com
+    - DATABASE_NAME=sq_kaoyaya
+    - DATABASE_USER=kyy_master
+    - DATABASE_PASSWORD=tdHRdT7V2o4d

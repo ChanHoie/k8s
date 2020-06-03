@@ -1,0 +1,31 @@
+wechat-web:
+  image: 'registry.cn-qingdao.aliyuncs.com/wechat-open/web:v201907101725'
+  command:
+    - '--registry_address=consul-server-bootstrap:8500'
+  expose:
+    - 80/tcp
+  labels:
+    aliyun.logs: /var/log
+    aliyun.routing.port_80: "http://wechat.kaoyaya.com,http://wechat2.kaoyaya.com"
+    aliyun.proxy.VIRTUAL_HOST_WEIGHT: '30'
+  restart: always
+
+  environment:
+    - DATABASE_HOST=rm-2zeb1f93086857hv0.mysql.rds.aliyuncs.com
+    - DATABASE_NAME=kaoyaya_yuncms
+    - DATABASE_USER=kyy_yuncms
+    - DATABASE_PASSWORD=4PYmsab4Ukyh
+    - MASTER_DB_HOST=rm-2ze8m2daqb051wp49.mysql.rds.aliyuncs.com
+    - MASTER_DB_NAME=sq_kaoyaya
+    - MASTER_DB_USER=kyy_master
+    - MASTER_DB_PASSWORD=tdHRdT7V2o4d
+    - WECHAT_DB_HOST=rm-2zeb1f93086857hv0.mysql.rds.aliyuncs.com
+    - WECHAT_DB_NAME=wechat
+    - WECHAT_DB_USER=kyy_yuncms
+    - WECHAT_DB_PASSWORD=4PYmsab4Ukyh
+    - REDIS_HOST=r-2ze6269f42e1f8c4.redis.rds.aliyuncs.com:6379
+    - REDIS_AUTH=9V3zrtA338ULq6N7s2
+    # - CHATBOT_URL=http://chatbot-server:5000
+    - REPLY_CACHE=false
+    - SOCKET_SERVICE=wechat-im-socket:8000
+    - PORT=80

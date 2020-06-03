@@ -1,0 +1,14 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  labels:
+    app: short-url-web
+  name: short-url-web
+spec:
+  rules:
+  - host: kyy1.cn
+    http:
+      paths:
+      - backend:
+          serviceName: short-url-web
+          servicePort: 80

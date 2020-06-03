@@ -1,0 +1,14 @@
+voucher-client:
+  image: registry.cn-qingdao.aliyuncs.com/kaoyaya/voucher-client:latest
+  restart: always
+  ports:
+    - '80'
+  labels:
+    aliyun.logs: /var/log
+    aliyun.routing.port_80: "http://account1.kaoyaya.com"
+    aliyun.proxy.VIRTUAL_HOST_WEIGHT: '22'
+  environment:
+    - VOUCHER_SERVER_URL=http://voucher-service:3003
+    - REDIS_HOST=r-2ze6269f42e1f8c4.redis.rds.aliyuncs.com:6379
+    - REDIS_AUTH=9V3zrtA338ULq6N7s2
+    - ADDRESS=0.0.0.0:80

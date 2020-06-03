@@ -1,0 +1,14 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  labels:
+    app: short-url-web-r
+  name: short-url-web-r
+spec:
+  rules:
+    - host: r.kaoyaya.com
+      http:
+        paths:
+          - backend:
+              serviceName: short-url-web-r
+              servicePort: 80

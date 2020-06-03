@@ -1,0 +1,22 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: skaoyaya
+  name: skaoyaya
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: skaoyaya
+    spec:
+      containers:
+        - env:
+            - name: SOLR_HOST
+              value: solr-service
+          image: registry.cn-qingdao.aliyuncs.com/kaoyaya/skaoyaya
+          name: skaoyaya
+          resources: {}
+      restartPolicy: Always

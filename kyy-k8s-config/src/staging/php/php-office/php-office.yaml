@@ -1,0 +1,14 @@
+php-office:
+  image: registry.cn-qingdao.aliyuncs.com/kaoyaya/0791hourse
+  ports:
+    - "80"
+  restart: always
+  labels:
+    aliyun.routing.port_80: "http://www.0791office.cn,http://0791office.cn,http://*.ncdeck.cn,http://*.1jiedai.com"
+m-office:
+  image: registry.cn-qingdao.aliyuncs.com/kaoyaya/hoursemobile
+  ports:
+    - "80"
+  restart: always
+  labels:
+    aliyun.routing.port_80: "http://m.0791office.cn"

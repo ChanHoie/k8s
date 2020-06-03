@@ -1,0 +1,20 @@
+# Source: ack-consul/templates/server-disruptionbudget.yaml
+# PodDisruptionBudget to prevent degrading the server cluster through
+# voluntary cluster changes.
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: ack-consul-server
+  namespace: default
+  labels:
+    app: ack-consul
+    chart: ack-consul-0.5.0
+    heritage: Tiller
+    release: consul
+spec:
+  maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: ack-consul
+      release: "consul"
+      component: server

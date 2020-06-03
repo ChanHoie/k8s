@@ -1,0 +1,43 @@
+# 定时推送发货订单到旺店通
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: trade-push
+  labels:
+    app: trade-push
+spec:
+  concurrencyPolicy: Forbid
+  schedule: "0 15 * * *"
+  successfulJobsHistoryLimit: 1
+  suspend: false
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    metadata:
+      labels:
+        app: trade-push
+    spec:
+      template:
+        metadata:
+          labels:
+            app: trade-push
+        spec:
+          containers:
+            - env:
+                - name: MASTER_DB_HOST
+                  value: rm-2ze8m2daqb051wp49.mysql.rds.aliyuncs.com
+                - name: MASTER_DB_NAME
+                  value: sq_kaoyaya
+                - name: MASTER_DB_PASSWORD
+                  value: tdHRdT7V2o4d
+                - name: MASTER_DB_USER
+                  value: kyy_master
+                - name: REDIS_AUTH
+                  value: 9V3zrtA338ULq6N7s2
+                - name: REDIS_HOST
+                  value: r-2ze6269f42e1f8c4.redis.rds.aliyuncs.com:6379
+                - name: RUN_MODE
+                  value: production
+              image: registry.cn-qingdao.aliyuncs.com/kaoyaya-micro/trade-push:0620-3
+              name: trade-push
+              resources: {}
+          restartPolicy: Never

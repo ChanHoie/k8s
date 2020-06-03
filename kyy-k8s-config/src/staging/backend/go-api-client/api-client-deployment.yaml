@@ -1,0 +1,25 @@
+# 考呀呀通用 api 服务第三方合作
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: api-client
+  name: api-client
+spec:
+  replicas: 2
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: api-client
+    spec:
+      containers:
+        - env:
+            - name: USERS_SERVICE
+              value: users-service
+          image: registry.cn-qingdao.aliyuncs.com/kaoyaya/api
+          name: api-client
+          ports:
+            - containerPort: 80
+          resources: {}
+      restartPolicy: Always

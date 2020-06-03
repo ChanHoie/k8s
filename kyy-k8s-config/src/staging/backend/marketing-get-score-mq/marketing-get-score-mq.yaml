@@ -1,0 +1,24 @@
+marketing-get-score-mq:
+  image: registry.cn-qingdao.aliyuncs.com/kaoyaya-micro/marketing-get-score-mq:latest
+  restart: always
+  labels:
+  environment:
+    - RUN_MODE=production
+    - MASTER_DB_HOST=$MASTER_DB_HOST
+    - MASTER_DB_NAME=$MASTER_DB_NAME
+    - MASTER_DB_USER=$MASTER_DB_USER
+    - MASTER_DB_PASSWORD=$MASTER_DB_PASSWORD
+    - REDIS_HOST=r-2ze6269f42e1f8c4.redis.rds.aliyuncs.com:6379
+    - REDIS_AUTH=9V3zrtA338ULq6N7s2
+    - WECHAT_DB_HOST=rm-2zeb1f93086857hv0.mysql.rds.aliyuncs.com
+    - WECHAT_DB_NAME=wechat
+    - WECHAT_DB_USER=kyy_yuncms
+    - WECHAT_DB_PASSWORD=4PYmsab4Ukyh
+    - PROXY_URL=
+    - PROXY_USER=ltinyho
+    - PROXY_PASSWORD=jsqqw54b
+    - PROXY_MODE= #可选值 kuaidaili
+    - DATABASE_HOST=rm-2zeb1f93086857hv0.mysql.rds.aliyuncs.com
+    - DATABASE_NAME=kaoyaya_yuncms
+    - DATABASE_USER=kyy_yuncms
+    - DATABASE_PASSWORD=4PYmsab4Ukyh

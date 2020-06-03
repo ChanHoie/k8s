@@ -1,0 +1,30 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: micro
+  name: micro
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: micro
+    spec:
+      imagePullSecrets:
+        - name: qingdao
+      containers:
+        - args:
+            - --registry_address=consul-server-bootstrap:8500
+            - --api_handler=rpc
+            - api
+          image: registry.cn-qingdao.aliyuncs.com/kaoyaya-micro/micro
+          imagePullPolicy: Always
+          name: micro
+          ports:
+            - containerPort: 8080
+              name: http
+              protocol: TCP
+          resources: {}
+      restartPolicy: Always

@@ -1,0 +1,13 @@
+marketing-get-score-work:
+  image: registry.cn-qingdao.aliyuncs.com/kaoyaya-micro/marketing-get-score-work:latest
+  restart: always
+  environment:
+    - RUN_MODE=production
+    - MASTER_DB_HOST=$MASTER_DB_HOST
+    - MASTER_DB_NAME=$MASTER_DB_NAME
+    - MASTER_DB_USER=$MASTER_DB_USER
+    - MASTER_DB_PASSWORD=$MASTER_DB_PASSWORD
+    - REDIS_HOST=r-2ze6269f42e1f8c4.redis.rds.aliyuncs.com:6379
+    - REDIS_AUTH=9V3zrtA338ULq6N7s2
+    - TASK_PAGE_SIZE=100  #每次任务数量
+    - TASK_TIME_GAP=1 #任务执行间隔单位为秒

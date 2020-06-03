@@ -1,0 +1,43 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: micro-edu
+  name: micro-edu
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: micro-edu
+    spec:
+      containers:
+        - args:
+            - --registry_address=consul-server-bootstrap:8500
+          env:
+            - name: DATABASE_HOST
+              value: 112.126.99.74:33006
+            - name: DATABASE_NAME
+              value: kaoyayacn
+            - name: DATABASE_PASSWORD
+              value: kaoyayacom2017
+            - name: DATABASE_USER
+              value: root
+            - name: ELASTICESEARCH_HOST
+              value: http://elasticsearch:9200
+            - name: MASTER_DB_HOST
+              value: 112.126.99.74:33006
+            - name: MASTER_DB_NAME
+              value: sq_kaoyaya
+            - name: MASTER_DB_PASSWORD
+              value: kaoyayacom2017
+            - name: MASTER_DB_USER
+              value: root
+            - name: RUN_MODE
+              value: dev
+          image: registry.cn-qingdao.aliyuncs.com/kaoyaya-micro/edu:dev
+          name: micro-edu
+          imagePullPolicy: Always
+          resources: {}
+      restartPolicy: Always

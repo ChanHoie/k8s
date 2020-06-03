@@ -1,0 +1,26 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: short-url-web-r
+  name: short-url-web-r
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: short-url-web-r
+    spec:
+      containers:
+        - args:
+            - --registry_address=consul-server-bootstrap:8500
+          env:
+            - name: PORT
+              value: "80"
+          image: registry.cn-qingdao.aliyuncs.com/kaoyaya-micro/short-url-web:v1
+          name: short-url-web-r
+          ports:
+            - containerPort: 80
+          resources: {}
+      restartPolicy: Always

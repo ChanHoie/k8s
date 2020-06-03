@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  labels:
+    app: ccc-php
+  name: ccc-php
+spec:
+  rules:
+    - host: "www.kyy.com"
+      http:
+        paths:
+          - backend:
+              serviceName: ccc-php
+              servicePort: 80
+            path: /

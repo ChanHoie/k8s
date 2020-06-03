@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  labels:
+    app: nuxt-kt
+  name: nuxt-kt
+spec:
+  rules:
+    - host: "s.kuaixuezaixian.com"
+      http:
+        paths:
+          - backend:
+              serviceName: nuxt-kt
+              servicePort: 3000
+            path: /
+          - backend:
+              serviceName: go-api
+              servicePort: 80
+            path: /api/v1/

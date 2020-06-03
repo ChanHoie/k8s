@@ -1,0 +1,22 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  labels:
+    app: go-page
+  name: go-page
+spec:
+  # 不用动,会影响业务
+  rules:
+    - host: "*.kaoyaya.com" # https 一定要设置指定的域名
+      http:
+        paths:
+          - backend:
+              serviceName: go-page
+              servicePort: 80
+            path: /page
+    - http:
+        paths:
+          - backend:
+              serviceName: go-page
+              servicePort: 80
+            path: /page

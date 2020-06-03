@@ -1,0 +1,30 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: website-kaoyaya-com-cn
+  name: website-kaoyaya-com-cn
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: website-kaoyaya-com-cn
+    spec:
+      containers:
+        - env:
+            - name: WORDPRESS_DB_HOST
+              value: 112.126.99.74
+            - name: WORDPRESS_DB_NAME
+              value: wordpress
+            - name: WORDPRESS_DB_PASSWORD
+              value: kaoyayacom2017
+            - name: WORDPRESS_DB_USER
+              value: root
+          image: wordpress:php7.3
+          name: website-kaoyaya-com-cn
+          ports:
+            - containerPort: 80
+          resources: {}
+      restartPolicy: Always

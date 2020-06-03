@@ -1,0 +1,16 @@
+chatbot:
+  image: registry.cn-qingdao.aliyuncs.com/kaoyaya/chatbot
+  hostname: chatbot-client
+  restart: always
+  expose:
+    - 80/tcp
+  labels:
+    aliyun.routing.port_80: "http://chatbot.kaoyaya.com"
+  environment:
+    - APP_DEBUG=false
+    - DOCUMENTROOT=/var/www/html
+    - DB_HOST=10.25.80.149
+    - DB_PORT=3306
+    - DB_DATABASE=chatbot
+    - DB_USER=root
+    - DB_PASSWORD=Nd1Gt6IgddAu

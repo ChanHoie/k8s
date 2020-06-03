@@ -1,0 +1,18 @@
+wx-article-client:
+  image: 'registry.cn-qingdao.aliyuncs.com/kaoyaya/wx-article-client:latest'
+  restart: always
+  hostname: wx-article-client
+  expose:
+    - 8080/tcp
+  environment:
+    - WX_ARTICLE_IP=wx-article-server
+    - constraint:aliyun.node_index==(4)
+  labels:
+    aliyun.logs: /var/log
+    aliyun.scale: '1'
+    aliyun.routing.port_8080: 'http://wxmp.kaoyaya.com;https://wxmp.kaoyaya.com'
+  memswap_limit: 0
+  shm_size: 0
+  memswap_reservation: 0
+  kernel_memory: 0
+  name: wx-article-client-1.0

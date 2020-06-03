@@ -1,0 +1,8 @@
+# 考呀呀手机端,现在跳转到手机端
+mkaoyaya:
+  image: registry.cn-qingdao.aliyuncs.com/kaoyaya/mkaoyaya
+  ports:
+    - '8080'
+  restart: always
+  labels:
+    aliyun.routing.port_8080: http://m.kaoyaya.com

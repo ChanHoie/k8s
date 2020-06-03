@@ -1,0 +1,30 @@
+elasticsearch:
+  # This is the OSS image, which comes without X-Pack, ML etc.
+  #iimage: elasticsearch:6.4.0
+  # This is the full image which includes everything but needs a license after some grace period.
+  image: docker.elastic.co/elasticsearch/elasticsearch:6.4.0
+  hostname: elasticsearch
+  # Make ES available both on _local_ and _site_,
+  # and use use _local_ for the publish_host.
+  #
+  # See here for details on network configuration:
+  # https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-network.html
+  #command: elasticsearch -Enetwork.host=0.0.0.0 -Enetwork.publish_host=192.168.0.165
+  #command: elasticsearch -Enetwork.host=112.126.99.74,_site_ -Enetwork.publish_host=112.126.99.74
+  #command: elasticsearch -Enetwork.host=0.0.0.0
+  environment:
+    # Set the cluster name (optional)
+    #- cluster.name=eslocal
+    #- bootstrap.memory_lock=true
+    #- http.host=0.0.0.0
+    # - transport.host=127.0.0.1
+    # X-Pack is only in the full ES image, not the OSS image.
+    # - xpack.security.enabled=false
+    - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
+    - constraint:aliyun.node_index==(1)
+  # Some useful ulimits
+  ports:
+    - 9200:9200
+  volumes:
+    #   # Make sure to create the ./data folder before starting
+    - /usr/share/elasticsearch/data:/usr/share/elasticsearch/data

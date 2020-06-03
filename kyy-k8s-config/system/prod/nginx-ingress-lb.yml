@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: >
+      {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"app":"nginx-ingress-lb"},"name":"nginx-ingress-lb","namespace":""},"spec":{"externalTrafficPolicy":"Local","ports":[{"name":"http","port":80,"targetPort":80},{"name":"https","port":443,"targetPort":443}],"selector":{"app":"ingress-nginx"},"type":"LoadBalancer"}}
+  labels:
+    app: nginx-ingress-lb
+  name: nginx-ingress-lb
+  namespace: kube-system
+  resourceVersion: '1652'
+  selfLink: /api/v1/namespaces/kube-system/services/nginx-ingress-lb
+  uid: bacd3ce6-971e-11e9-90a5-00163e12a87f
+spec:
+  clusterIP: 172.17.73.93
+  externalTrafficPolicy: Local
+  healthCheckNodePort: 32734
+  ports:
+    - name: http
+      nodePort: 31363
+      port: 80
+      protocol: TCP
+      targetPort: 80
+    - name: https
+      nodePort: 30149
+      port: 443
+      protocol: TCP
+      targetPort: 443
+  selector:
+    app: ingress-nginx
+  sessionAffinity: None
+  type: LoadBalancer
+status:
+  loadBalancer:
+    ingress:
+      - ip: 47.95.71.132

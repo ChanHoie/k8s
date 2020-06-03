@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    aliyun.routing.port_80: http://www.kaoyaya.com/tiku/pc/
+    kompose.cmd: kompose-darwin-amd64 convert -f fe-tiku-pc.yaml
+    kompose.version: 1.17.0 (70e82c92)
+  labels:
+    app: fe-tiku-pc
+  name: fe-tiku-pc
+spec:
+  ports:
+    - name: "80"
+      port: 80
+      targetPort: 80
+  selector:
+    app: fe-tiku-pc

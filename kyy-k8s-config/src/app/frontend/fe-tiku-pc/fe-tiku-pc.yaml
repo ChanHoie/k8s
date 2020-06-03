@@ -1,0 +1,7 @@
+fe-tiku-pc:
+  image: registry.cn-qingdao.aliyuncs.com/kaoyaya/fe-tiku-pc
+  restart: always
+  expose:
+    - 80/tcp
+  labels:
+    aliyun.routing.port_80: http://www.kaoyaya.com/tiku/pc/

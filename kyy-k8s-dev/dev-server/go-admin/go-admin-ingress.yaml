@@ -1,0 +1,18 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  labels:
+    app: go-admin
+  name: go-admin
+  annotations:
+    nginx.ingress.kubernetes.io/server-alias: "lzh.kyy.com,caishidian.kyy.com"
+spec:
+  rules:
+    - host: 'www.kyy.com' # https 必须单独指明
+      http:
+        paths:
+          - backend:
+              serviceName: go-admin
+              servicePort: 8888
+            path: /admin/api/
+

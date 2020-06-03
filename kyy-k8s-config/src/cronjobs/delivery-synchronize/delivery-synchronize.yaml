@@ -1,0 +1,15 @@
+version: "2"
+labels:
+  aliyun.schedule: "0 */2 * * * *"
+services:
+    delivery-synchronize:
+       image: "registry.cn-qingdao.aliyuncs.com/kaoyaya-micro/delivery-synchronize:0702-6"
+       environment:
+        - RUN_MODE=production
+        - PORT=80
+        - MASTER_DB_HOST=rm-2ze8m2daqb051wp49.mysql.rds.aliyuncs.com
+        - MASTER_DB_NAME=sq_kaoyaya
+        - MASTER_DB_USER=kyy_master
+        - MASTER_DB_PASSWORD=tdHRdT7V2o4d
+        - REDIS_HOST=r-2ze6269f42e1f8c4.redis.rds.aliyuncs.com:6379
+        - REDIS_AUTH=9V3zrtA338ULq6N7s2

@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  labels:
+    app: go-sitemap
+  name: go-sitemap
+spec:
+  # 不用动,会影响业务
+  rules:
+    - host: "*.kaoyaya.com" # https 一定要设置指定的域名
+      http:
+        paths:
+          - backend:
+              serviceName: go-sitemap
+              servicePort: 80
+            path: /sitemap/

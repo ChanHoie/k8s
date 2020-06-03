@@ -1,0 +1,17 @@
+apiVersion: autoscaling/v2beta1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: fe-admin
+  namespace: default
+spec:
+  scaleTargetRef: # 绑定 Deployment name
+    apiVersion: apps/v1beta2
+    kind: Deployment
+    name: fe-admin
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        targetAverageUtilization: 50

@@ -1,0 +1,18 @@
+wx-article-server:
+  image: 'registry.cn-qingdao.aliyuncs.com/kaoyaya/wx-article-server:latest'
+  restart: always
+  hostname: wx-article-server
+  labels:
+    aliyun.logs: /var/log
+    aliyun.scale: '1'
+  environment:
+    - DATABASE_HOST=112.126.99.74
+    - DATABASE_NAME=wxapp
+    - DATABASE_USER=root
+    - DATABASE_PASSWORD=kaoyayacom2017
+    - constraint:aliyun.node_index==(3)
+  memswap_limit: 0
+  shm_size: 0
+  memswap_reservation: 0
+  kernel_memory: 0
+  name: wx-article-server
