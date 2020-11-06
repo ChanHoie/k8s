@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: blog-web
+  name: blog-web
+spec:
+  replicas: 1
+  selector:
+   matchLabels:
+     app: blog-web
+  template:
+    metadata:
+      labels:
+        app: blog-web
+    spec:
+      containers:
+        - name: blog-web
+          image: registry.cn-shanghai.aliyuncs.com/mikoto/blog-web:latest
+          imagePullPolicy: Always #IfNotPresent
+          ports:
+            - containerPort: 8081
+          resources: {}
+      imagePullSecrets:
+        - name: aliyun-docker
+      hostNetwork: true
+      restartPolicy: Always

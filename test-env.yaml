@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: tv
+  name: tv
+spec:
+  replicas: 1
+  selector:
+   matchLabels:
+     app: tv
+  template:
+    metadata:
+      labels:
+        app: tv
+    spec:
+      containers:
+        - name: tv
+          image: test_env:latest
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: REDIS_HOST
+              value: k8s-redis:6379
+          resources: {}
+      restartPolicy: Always

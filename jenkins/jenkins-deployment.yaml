@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: k8s-jenkins
+  name: k8s-jenkins
+spec:
+  replicas: 1
+  selector:
+   matchLabels:
+     app: k8s-jenkins
+  template:
+    metadata:
+      labels:
+        app: k8s-jenkins
+    spec:
+      containers:
+        - name: k8s-jenkins
+          image: jenkinsci/blueocean:latest
+          imagePullPolicy: IfNotPresent #IfNotPresent
+          securityContext:
+            runAsUser: 0
+          volumeMounts:
+          - name: data
+            mountPath: /var/jenkins_home
+          - name: docker-socket
+            mountPath: /var/run/docker.sock
+          - name: docker-auth
+            mountPath: /root/.docker
+          ports:
+            - containerPort: 8080
+            - containerPort: 50000
+          resources: {}
+      restartPolicy: Always
+      volumes:
+      - name: data
+        hostPath:
+          path: /Users/mikoto/data/jenkins_home
+      - name: docker-socket
+        hostPath:
+          path: /var/run/docker.sock
+          type: ''
+      - name: docker-auth
+        hostPath:
+          path: /Users/mikoto/data/jenkins_auth

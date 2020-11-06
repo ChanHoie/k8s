@@ -20,10 +20,17 @@ spec:
               serviceName: blog-web
               servicePort: 8081
             path: /
+    - host: "franxx.top" # https 一定要设置指定的域名
+      http:
+        paths:
+          - backend:
+              serviceName: blog-web
+              servicePort: 8081
+            path: /
     - host: "image.franxx.top" # https 一定要设置指定的域名
       http:
         paths:
           - backend:
               serviceName: blog-image
               servicePort: 8082
-            path: /            
+            path: /

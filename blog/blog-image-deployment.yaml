@@ -23,7 +23,6 @@ spec:
           volumeMounts:
            - mountPath: /home/ftpuser/www  # 容器内路径
              name: images     # 要与 volume 中 name 匹配
-          volumeMounts:
            - mountPath: /etc/nginx/nginx.conf    # 容器内路径
              name: nginx-conf     # 要与 volume 中 name 匹配
              subPath: nginx.conf

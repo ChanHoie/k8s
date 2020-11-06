@@ -1,0 +1,17 @@
+FROM frolvlad/alpine-oraclejdk8:slim
+MAINTAINER "Mikoto <1210382799@qq.com>"
+
+ENV MAVEN_VERSION 3.6.3
+ENV MAVEN_HOME /usr/local/maven/default-maven
+ENV MAVEN_DOWNLOAD_URL http://mirror.bit.edu.cn/apache/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz
+
+RUN apk add --no-cache bash tar wget ca-certificates unzip \
+    && mkdir -p  ${MAVEN_HOME} \
+    && wget ${MAVEN_DOWNLOAD_URL} \
+    && tar -zxf apache-maven-${MAVEN_VERSION}-bin.tar.gz -C ${MAVEN_HOME} --strip-components=1 \
+    && ln -s ${MAVEN_HOME}/bin/mvn /usr/local/bin/mvn \
+    && apk del tar wget ca-certificates unzip \
+    && rm -rf   apache-maven-${MAVEN_VERSION}-bin.tar.gz \
+                ${MAVEN_HOME}/bin/*.bat \
+                /tmp/*
+CMD ["bash"]

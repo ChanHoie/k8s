@@ -16,11 +16,12 @@ spec:
     spec:
       containers:
         - name: blog-backstage
-          image: registry.cn-shanghai.aliyuncs.com/mikoto/blog-backstage:0.2
-          imagePullPolicy: IfNotPresent
+          image: registry.cn-shanghai.aliyuncs.com/mikoto/blog-backstage:latest
+          imagePullPolicy: Always #IfNotPresent
           ports:
             - containerPort: 8080
           resources: {}
+      imagePullSecrets:
+        - name: aliyun-docker
       hostNetwork: true
       restartPolicy: Always
-
