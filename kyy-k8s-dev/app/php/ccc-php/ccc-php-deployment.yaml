@@ -1,0 +1,34 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: ccc-php
+  name: ccc-php
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: ccc-php
+    spec:
+      imagePullSecrets:
+        - name: beijing
+      volumes:
+        - name: php-code
+          hostPath:
+            path: /Users/sunrich/Downloads/ccc-php
+      containers:
+        - env:
+            - name: DOCUMENTROOT
+              value: /var/www/html/kaoyayacn/web
+          image: registry.cn-beijing.aliyuncs.com/kaoyaya/kaoyaya:staging
+          name: ccc-php
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          resources: {}
+          volumeMounts:
+            - mountPath: /var/www/html/kaoyayacn/
+              name: php-code
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30

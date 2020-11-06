@@ -1,0 +1,14 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  labels:
+    app: website-yuncms
+  name: website-yuncms
+spec:
+  rules:
+    - host: www.kaoyaya.cn
+      http:
+        paths:
+          - backend:
+              serviceName: website-yuncms
+              servicePort: 80

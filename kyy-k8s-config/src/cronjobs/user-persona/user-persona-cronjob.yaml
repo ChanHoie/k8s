@@ -1,0 +1,43 @@
+# 用户画像数据
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: user-persona
+  labels:
+    app: user-persona
+spec:
+  concurrencyPolicy: Forbid
+  schedule: "0 3 * * *"
+  successfulJobsHistoryLimit: 1
+  suspend: false
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    metadata:
+      labels:
+        app: user-persona
+    spec:
+      template:
+        metadata:
+          labels:
+            app: user-persona
+        spec:
+          containers:
+            - env:
+                - name: ELASTICESEARCH_HOST
+                  value: http://elasticsearch:9200
+                - name: MASTER_DB_HOST
+                  value: rm-2ze8m2daqb051wp49.mysql.rds.aliyuncs.com
+                - name: MASTER_DB_NAME
+                  value: sq_kaoyaya
+                - name: MASTER_DB_PASSWORD
+                  value: tdHRdT7V2o4d
+                - name: MASTER_DB_USER
+                  value: kyy_master
+                - name: PORT
+                  value: "80"
+                - name: RUN_MODE
+                  value: production
+              image: registry.cn-qingdao.aliyuncs.com/kaoyaya-micro/user-persona:0510
+              name: user-persona
+              resources: {}
+          restartPolicy: Never

@@ -1,0 +1,18 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  labels:
+    app: go-page
+  name: go-page
+  annotations:
+    nginx.ingress.kubernetes.io/server-alias: "zckjpx.kuaixuezaixian.com,caishidian.kuaixuezaixian.com"
+spec:
+  # 不用动,会影响业务
+  rules:
+    - host: "www.kuaixuezaixian.com"
+      http:
+        paths:
+          - backend:
+              serviceName: go-page
+              servicePort: 80
+            path: /page

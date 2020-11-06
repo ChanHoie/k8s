@@ -1,0 +1,22 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  labels:
+    app: fe-admin
+  name: fe-admin
+spec:
+  rules:
+    - host: '*.kaoyaya.com'
+      http:
+        paths:
+          - backend:
+              serviceName: fe-admin
+              servicePort: 80
+            path: /web/admin
+    - http:
+        paths:
+          - backend:
+              serviceName: fe-admin
+              servicePort: 80
+            path: /web/admin
+

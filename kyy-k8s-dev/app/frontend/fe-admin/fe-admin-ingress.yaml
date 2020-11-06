@@ -1,0 +1,18 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  labels:
+    app: fe-admin
+  name: fe-admin
+  annotations:
+    nginx.ingress.kubernetes.io/server-alias: "lzh.kyy.com,caishidian.kyy.com"
+spec:
+  rules:
+    - host: 'www.kyy.com'
+      http:
+        paths:
+          - backend:
+              serviceName: fe-admin
+              servicePort: 80
+            path: /web/admin
+

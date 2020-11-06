@@ -1,0 +1,20 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  labels:
+    app: fe-wap
+  name: fe-wap
+  annotations:
+    nginx.ingress.kubernetes.io/server-alias: "lzh.kyy.com,caishidian.kyy.com"
+spec:
+  rules:
+    - host: 'www.kyy.com'
+      http:
+        paths:
+          - backend:
+              serviceName: fe-wap
+              servicePort: 80
+            path: /i/
+
+
+

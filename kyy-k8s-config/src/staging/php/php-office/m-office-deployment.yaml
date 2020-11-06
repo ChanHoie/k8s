@@ -1,0 +1,21 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: m-office
+  name: m-office
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: m-office
+    spec:
+      containers:
+        - image: registry.cn-qingdao.aliyuncs.com/kaoyaya/hoursemobile
+          name: m-office
+          ports:
+            - containerPort: 80
+          resources: {}
+      restartPolicy: Always

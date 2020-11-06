@@ -1,0 +1,32 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  labels:
+    app: php-office
+  name: php-office
+spec:
+  rules:
+    - host: www.0791office.cn
+      http:
+        paths:
+          - backend:
+              serviceName: php-office
+              servicePort: 80
+    - host: 0791office.cn
+      http:
+        paths:
+          - backend:
+              serviceName: php-office
+              servicePort: 80
+    - host: "*.ncdeck.cn"
+      http:
+        paths:
+          - backend:
+              serviceName: php-office
+              servicePort: 80
+    - host: "*.1jiedai.com"
+      http:
+        paths:
+          - backend:
+              serviceName: php-office
+              servicePort: 80

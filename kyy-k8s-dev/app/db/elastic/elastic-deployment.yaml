@@ -1,0 +1,40 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: elasticsearch
+  name: elasticsearch
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: elasticsearch
+    spec:
+      imagePullSecrets:
+        - name: beijing
+      volumes:
+        - name: elasticsearch-data
+          hostPath:
+            path: /Users/sunrich/work/elasticsearch/
+      containers:
+        - env:
+            - name: 'cluster.name'
+              value: 'docker-cluster'
+            - name: 'bootstrap.memory_lock'
+              value: 'true'
+            - name: 'ES_JAVA_OPTS'
+              value: '-Xms512m -Xmx512m'
+            - name: 'discovery.type'
+              value: 'single-node'
+          image: registry.cn-hangzhou.aliyuncs.com/elasticsearch/aliyun-elasticsearch:6.3.2
+          name: elasticsearch
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9300
+          resources: {}
+          volumeMounts:
+            - mountPath: /usr/share/elasticsearch/data
+              name: elasticsearch-data
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30

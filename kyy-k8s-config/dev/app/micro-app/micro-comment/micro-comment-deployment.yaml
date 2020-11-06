@@ -1,0 +1,32 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: micro-comment
+  name: micro-comment
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: micro-comment
+    spec:
+      imagePullSecrets:
+        - name: qingdao
+      containers:
+        - args:
+            - --registry_address=consul-server-bootstrap:8500
+          env:
+            - name: MASTER_DB_HOST
+              value: 192.168.3.220:33006
+            - name: MASTER_DB_NAME
+              value: sq_kaoyaya
+            - name: MASTER_DB_PASSWORD
+              value: kaoyayacom2017
+            - name: MASTER_DB_USER
+              value: root
+          image: registry.cn-qingdao.aliyuncs.com/kaoyaya-micro/comment:dev
+          name: micro-comment
+          resources: {}
+      restartPolicy: Always

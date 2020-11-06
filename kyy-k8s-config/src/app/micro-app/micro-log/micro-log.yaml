@@ -1,0 +1,10 @@
+micro-log:
+  command:
+    - '--registry_address=consul-server-bootstrap:8500'
+  image: registry.cn-qingdao.aliyuncs.com/kaoyaya-micro/log:latest
+  restart: always
+  environment:
+     - DATABASE_HOST=rm-2ze8m2daqb051wp49.mysql.rds.aliyuncs.com
+     - DATABASE_NAME=sq_kaoyaya
+     - DATABASE_USER=kyy_master
+     - DATABASE_PASSWORD=tdHRdT7V2o4d

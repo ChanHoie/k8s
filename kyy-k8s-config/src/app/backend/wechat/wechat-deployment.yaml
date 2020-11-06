@@ -1,0 +1,30 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: wechat
+  name: wechat
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: wechat
+    spec:
+      containers:
+        - args:
+            - --registry_address=consul-server-bootstrap:8500
+          env:
+            - name: DATABASE_HOST
+              value: rm-2zeb1f93086857hv0.mysql.rds.aliyuncs.com
+            - name: DATABASE_NAME
+              value: short-url
+            - name: DATABASE_PASSWORD
+              value: 4PYmsab4Ukyh
+            - name: DATABASE_USER
+              value: kyy_yuncms
+          image: registry.cn-qingdao.aliyuncs.com/kaoyaya-micro/short-url:latest
+          name: wechat
+          resources: {}
+      restartPolicy: Always

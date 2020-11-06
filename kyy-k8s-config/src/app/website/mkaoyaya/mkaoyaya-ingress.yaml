@@ -1,0 +1,14 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  labels:
+    app: mkaoyaya
+  name: mkaoyaya
+spec:
+  rules:
+    - host: m.kaoyaya.com
+      http:
+        paths:
+          - backend:
+              serviceName: mkaoyaya
+              servicePort: 8080

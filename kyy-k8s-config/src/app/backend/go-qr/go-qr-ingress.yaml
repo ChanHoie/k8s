@@ -1,0 +1,14 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  labels:
+    app: go-qr
+  name: go-qr
+spec:
+  rules:
+    - host: "qr.kaoyaya.com"
+      http:
+        paths:
+          - backend:
+              serviceName: go-qr
+              servicePort: 80

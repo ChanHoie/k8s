@@ -1,0 +1,12 @@
+wechat-im-socket:
+  image: registry.cn-qingdao.aliyuncs.com/kaoyaya/wechat-im-socket
+  hostname: wechat-im-socket
+  ports:
+    - '8000'
+  restart: always
+  labels:
+    aliyun.routing.port_8000: wss://wxws.kaoyaya.com
+  environment:
+    - REDIS_HOST=r-2ze6269f42e1f8c4.redis.rds.aliyuncs.com:6379
+    - REDIS_AUTH=9V3zrtA338ULq6N7s2
+    - LOGOUT_URL=http://php-kaoyayacom

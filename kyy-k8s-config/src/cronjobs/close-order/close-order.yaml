@@ -1,0 +1,11 @@
+version: "2"
+labels:
+  aliyun.schedule: "0 */10 * * *"
+services:
+   close-order:
+       image: "registry.cn-qingdao.aliyuncs.com/kaoyaya-micro/close-order"
+       environment:
+        - MASTER_DB_HOST=rm-2ze8m2daqb051wp49.mysql.rds.aliyuncs.com
+        - MASTER_DB_NAME=sq_kaoyaya
+        - MASTER_DB_USER=kyy_master
+        - MASTER_DB_PASSWORD=tdHRdT7V2o4d

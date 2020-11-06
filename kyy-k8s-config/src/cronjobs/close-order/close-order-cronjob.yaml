@@ -1,0 +1,37 @@
+# 关闭订单服务
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  labels:
+    app: close-order
+  name: close-order
+spec:
+  concurrencyPolicy: Forbid
+  failedJobsHistoryLimit: 1
+  schedule: "*/10 * * * *"
+  successfulJobsHistoryLimit: 1
+  suspend: false
+  jobTemplate:
+    metadata:
+      labels:
+        app: close-order
+    spec:
+      template:
+        metadata:
+          labels:
+            app: close-order
+        spec:
+          containers:
+            - env:
+                - name: MASTER_DB_HOST
+                  value: rm-2ze8m2daqb051wp49.mysql.rds.aliyuncs.com
+                - name: MASTER_DB_NAME
+                  value: sq_kaoyaya
+                - name: MASTER_DB_PASSWORD
+                  value: tdHRdT7V2o4d
+                - name: MASTER_DB_USER
+                  value: kyy_master
+              image: registry.cn-qingdao.aliyuncs.com/kaoyaya-micro/close-order
+              name: close-order
+              resources: {}
+          restartPolicy: Never

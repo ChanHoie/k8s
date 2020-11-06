@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose-darwin-amd64 convert -f  fe-tiku-v2-wap.yaml
+    kompose.version: 1.17.0 (70e82c92)
+
+  labels:
+    app: fe-tiku-v2-wap
+  name: fe-tiku-v2-wap
+spec:
+  ports:
+    - name: "80"
+      port: 80
+      targetPort: 80
+  selector:
+    app: fe-tiku-v2-wap
+status:
+  loadBalancer: {}

@@ -1,0 +1,45 @@
+# 定时同步发货订单物流信息到考呀呀平台
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: delivery-synchronize
+  labels:
+    app: delivery-synchronize
+spec:
+  concurrencyPolicy: Forbid
+  schedule: "*/2 * * * *"
+  successfulJobsHistoryLimit: 1
+  suspend: false
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    metadata:
+      labels:
+        app: delivery-synchronize
+    spec:
+      template:
+        metadata:
+          labels:
+            app: delivery-synchronize
+        spec:
+          containers:
+            - env:
+                - name: MASTER_DB_HOST
+                  value: rm-2ze8m2daqb051wp49.mysql.rds.aliyuncs.com
+                - name: MASTER_DB_NAME
+                  value: sq_kaoyaya
+                - name: MASTER_DB_PASSWORD
+                  value: tdHRdT7V2o4d
+                - name: MASTER_DB_USER
+                  value: kyy_master
+                - name: PORT
+                  value: "80"
+                - name: REDIS_AUTH
+                  value: 9V3zrtA338ULq6N7s2
+                - name: REDIS_HOST
+                  value: r-2ze6269f42e1f8c4.redis.rds.aliyuncs.com:6379
+                - name: RUN_MODE
+                  value: production
+              image: registry.cn-qingdao.aliyuncs.com/kaoyaya-micro/delivery-synchronize:0716-08
+              name: delivery-synchronize
+              resources: {}
+          restartPolicy: Never

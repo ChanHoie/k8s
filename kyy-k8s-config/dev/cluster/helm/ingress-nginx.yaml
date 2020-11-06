@@ -1,0 +1,35 @@
+replicaCount: 1
+nodeSelector:
+  node-role.kubernetes.io/edge: ''
+affinity:
+  podAntiAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchExpressions:
+            - key: app
+              operator: In
+              values:
+                - nginx-ingress
+            - key: component
+              operator: In
+              values:
+                - controller
+        topologyKey: kubernetes.io/hostname
+tolerations:
+  - key: node-role.kubernetes.io/master
+    operator: Exists
+    effect: NoSchedule
+  - key: node-role.kubernetes.io/master
+    operator: Exists
+    effect: PreferNoSchedule
+defaultBackend:
+  nodeSelector:
+    node-role.kubernetes.io/edge: ''
+  tolerations:
+    - key: node-role.kubernetes.io/master
+      operator: Exists
+      effect: NoSchedule
+    - key: node-role.kubernetes.io/master
+      operator: Exists
+      effect: PreferNoSchedule
+

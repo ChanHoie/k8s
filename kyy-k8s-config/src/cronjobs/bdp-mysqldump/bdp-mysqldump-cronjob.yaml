@@ -1,0 +1,31 @@
+# 账号管理脚本
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  labels:
+    app: bdp-mysqldump
+  name: bdp-mysqldump
+spec:
+  concurrencyPolicy: Forbid
+  schedule: "0 5 * * *"
+  successfulJobsHistoryLimit: 1
+  suspend: false
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    metadata:
+      labels:
+        app: bdp-mysqldump
+    spec:
+      template:
+        metadata:
+          labels:
+            app: bdp-mysqldump
+        spec:
+          containers:
+            - env:
+                - name: TABLES
+                  value: "orders_bill"
+              image: registry-vpc.cn-beijing.aliyuncs.com/kaoyaya/mysqldump:bdp
+              name: bdp-mysqldump
+              resources: {}
+          restartPolicy: Never

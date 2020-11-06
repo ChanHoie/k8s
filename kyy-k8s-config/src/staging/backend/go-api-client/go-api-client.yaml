@@ -1,0 +1,10 @@
+api-client:
+  image: registry.cn-qingdao.aliyuncs.com/kaoyaya/api
+  restart: always
+  hostname: api-client
+  environment:
+    - USERS_SERVICE=users-service
+  ports:
+    - '80'
+  labels:
+    aliyun.routing.port_80: http://api.kaoyaya.com

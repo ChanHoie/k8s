@@ -1,0 +1,7 @@
+website-music:
+  image: registry.cn-qingdao.aliyuncs.com/kaoyaya/music:latest
+  ports:
+    - '80'
+  restart: always
+  labels:
+    aliyun.routing.port_80: http://1jiedai.com;http://www.1jiedai.com

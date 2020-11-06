@@ -1,0 +1,76 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: go-api
+  name: go-api
+spec:
+  replicas: 4
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: go-api
+    spec:
+      containers:
+        - args:
+            - --registry_address=consul-server-bootstrap:8500
+          env:
+            - name: MASTER_DB_HOST
+              value: rm-2ze8m2daqb051wp49.mysql.rds.aliyuncs.com
+            - name: MASTER_DB_NAME
+              value: sq_kaoyaya
+            - name: MASTER_DB_PASSWORD
+              value: tdHRdT7V2o4d
+            - name: MASTER_DB_USER
+              value: kyy_master
+            - name: PORT
+              value: "80"
+            - name: QUESTION_CASH
+              value: "true"
+            - name: QUESTION_DB_HOST
+              value: rm-2ze1284oau0bzbz97.mysql.rds.aliyuncs.com
+            - name: QUESTION_DB_NAME
+              value: question
+            - name: QUESTION_DB_PASSWORD
+              value: Nd1Gt6IgddAu
+            - name: QUESTION_DB_USER
+              value: kyy_question
+            - name: REDIS_AUTH
+              value: 9V3zrtA338ULq6N7s2
+            - name: REDIS_HOST
+              value: r-2ze6269f42e1f8c4.redis.rds.aliyuncs.com:6379
+            - name: WECHAT_DB_HOST
+              value: rm-2zeb1f93086857hv0.mysql.rds.aliyuncs.com
+            - name: WECHAT_DB_NAME
+              value: wechat
+            - name: WECHAT_DB_PASSWORD
+              value: 4PYmsab4Ukyh
+            - name: WECHAT_DB_USER
+              value: kyy_yuncms
+            - name: MAXCOMPUTE_DB_HOST
+              value: rm-2ze8m2daqb051wp49.mysql.rds.aliyuncs.com
+            - name: MAXCOMPUTE_DB_NAME
+              value: maxcompute
+            - name: MAXCOMPUTE_DB_PASSWORD
+              value: tdHRdT7V2o4d
+            - name: MAXCOMPUTE_DB_USER
+              value: kyy_master
+            - name: WORDPRESS_DB_HOST
+              value: rm-2zeb1f93086857hv0.mysql.rds.aliyuncs.com
+            - name: WORDPRESS_DB_NAME
+              value: news_kaoyaya
+            - name: WORDPRESS_DB_PASSWORD
+              value: bN8dH6g2uWgC
+            - name: WORDPRESS_DB_USER
+              value: news_kaoyaya
+            - name: RUN_MODE
+              value: production
+          image: registry.cn-beijing.aliyuncs.com/kaoyaya-micro/api-web
+          name: go-api
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          resources: {}
+      restartPolicy: Always
+status: {}

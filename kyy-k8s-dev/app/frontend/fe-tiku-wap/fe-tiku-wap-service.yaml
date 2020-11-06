@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    aliyun.proxy.VIRTUAL_HOST_WEIGHT: "28"
+    aliyun.routing.port_80: http://www.kaoyaya.com/tiku/wap/
+    kompose.cmd: kompose-darwin-amd64 convert -f fe-tiku-wap.yaml
+    kompose.version: 1.17.0 (70e82c92)
+
+  labels:
+    app: fe-tiku-wap
+  name: fe-tiku-wap
+spec:
+  ports:
+    - name: "80"
+      port: 80
+      targetPort: 80
+  selector:
+    app: fe-tiku-wap
+status:
+  loadBalancer: {}

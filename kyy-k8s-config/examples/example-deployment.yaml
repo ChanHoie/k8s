@@ -1,0 +1,78 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  labels:
+    app: busybox
+  name:  example-deployment
+  namespace: default
+spec:
+  progressDeadlineSeconds: 2147483647
+  replicas: 3 # pod 数量
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: busybox
+  strategy:
+    # 滚动更新
+    rollingUpdate:
+      maxSurge: 1 # 最大
+      maxUnavailable: 1 # 最大不可用数量
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: busybox
+    spec:
+      # 节点选择
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchLabels:
+                  app: fe-admin
+              topologyKey: kubernetes.io/hostname
+      containers:
+        env:
+          - name: HOSTNAME
+            value: busybox
+        image: busybox
+        command: ["sh","-c","echo $HOSTNAME"]
+        imagePullPolicy: Always
+        # 存活检测 https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/
+        livenessProbe:
+          initialDelaySeconds: 15 # 延迟探测
+          failureThreshold: 3 # 视为未准备的重试次数
+          periodSeconds: 10 # 探测频率
+          successThreshold: 1 # 失败后探测成功的最小连续成功次数,必须为 1
+          tcpSocket:
+            port: 80
+          timeoutSeconds: 1 # probe 超时设置
+        name: busybox
+        ports:
+          - containerPort: 80
+            protocol: TCP
+        # 准备检测 https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#configure-probes
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /busybox
+            port: 80
+            scheme: HTTP
+          initialDelaySeconds: 3
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        resources:
+          requests:
+            cpu: 250m
+            memory: 512Mi
+          limits:
+            cpu: 500m
+            memory: 1024Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30

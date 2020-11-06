@@ -1,0 +1,20 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  labels:
+    app: voucher-client
+  name: voucher-client
+spec:
+  rules:
+    - host: account.kaoyaya.com
+      http:
+        paths:
+          - backend:
+              serviceName: voucher-client
+              servicePort: 80
+    - host: account.accgg.com
+      http:
+        paths:
+          - backend:
+              serviceName: voucher-client
+              servicePort: 80

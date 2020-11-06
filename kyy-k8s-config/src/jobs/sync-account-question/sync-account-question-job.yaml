@@ -1,0 +1,46 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  labels:
+    app: sync-account-question
+  name: sync-account-question
+  namespace: default
+spec:
+  backoffLimit: 3
+  completions: 1
+  parallelism: 1
+  template:
+    metadata:
+      labels:
+        app: sync-account-question
+    spec:
+      containers:
+        - env:
+            - name: MASTER_DB_HOST
+              value: rm-2ze8m2daqb051wp49.mysql.rds.aliyuncs.com
+            - name: MASTER_DB_NAME
+              value: sq_kaoyaya
+            - name: MASTER_DB_PASSWORD
+              value: tdHRdT7V2o4d
+            - name: MASTER_DB_USER
+              value: kyy_master
+            - name: QUESTION_DB_HOST
+              value: rm-2ze1284oau0bzbz97.mysql.rds.aliyuncs.com
+            - name: QUESTION_DB_NAME
+              value: question
+            - name: QUESTION_DB_PASSWORD
+              value: Nd1Gt6IgddAu
+            - name: QUESTION_DB_USER
+              value: kyy_question
+            - name: RUN_MODE
+              value: dev
+          image: registry.cn-beijing.aliyuncs.com/kaoyaya-micro/sync-account-question
+          imagePullPolicy: Always
+          name: sync-account-question
+          terminationMessagePath: /dev/termiaccount_questionnation-log
+          terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Never
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+

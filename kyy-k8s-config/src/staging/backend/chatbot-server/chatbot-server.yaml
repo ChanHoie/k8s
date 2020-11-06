@@ -1,0 +1,11 @@
+chatbot-server:
+  restart: always
+  ports:
+    - 5000/tcp
+  environment:
+    - LANG=C.UTF-8
+    - GPG_KEY=0D96DF4D4110E5C43FBFB17F2D347EA6AA65421D
+  hostname: chatbot-server
+  labels:
+    aliyun.routing.port_5000: 'http://chat.kaoyaya.com'
+  image: 'registry.cn-qingdao.aliyuncs.com/kaoyaya/chat-bot:latest'

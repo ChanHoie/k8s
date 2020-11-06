@@ -1,0 +1,21 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: website-music
+  name: website-music
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: website-music
+    spec:
+      containers:
+        - image: registry.cn-qingdao.aliyuncs.com/kaoyaya/music:latest
+          name: music
+          ports:
+            - containerPort: 80
+          resources: {}
+      restartPolicy: Always

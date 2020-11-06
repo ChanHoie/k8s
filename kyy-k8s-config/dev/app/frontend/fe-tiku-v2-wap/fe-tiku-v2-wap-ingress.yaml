@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+
+  labels:
+    app: fe-tiku-v2-wap
+  name: fe-tiku-v2-wap
+  annotations:
+    nginx.ingress.kubernetes.io/server-alias: "zckjpx.kuaixuezaixian.com,caishidian.kuaixuezaixian.com"
+spec:
+  rules:
+    - host: "www.kuaixuezaixian.com"
+      http:
+        paths:
+          - backend:
+              serviceName: fe-tiku-v2-wap
+              servicePort: 80
+            path: /tiku/v2/wap/
+

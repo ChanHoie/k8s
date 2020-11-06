@@ -1,0 +1,22 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  labels:
+    app: go-api
+  name: go-api
+spec:
+  rules:
+    - host: '*.kaoyaya.com'
+      http:
+        paths:
+          - backend:
+              serviceName: go-api
+              servicePort: 80
+            path: /api/v1/
+    - http:
+        paths:
+          - backend:
+              serviceName: go-api
+              servicePort: 80
+            path: /api/v1/
+

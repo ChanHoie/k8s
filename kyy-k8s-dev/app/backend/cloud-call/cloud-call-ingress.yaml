@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  labels:
+    app: k8s-cloud-call
+  name: k8s-cloud-call
+spec:
+  tls:
+    - hosts:
+      secretName: kyy-ingress-secret
+  # 不用动,会影响业务
+  rules:
+    - host: "www.kyy.com" # https 一定要设置指定的域名
+      http:
+        paths:
+          - backend:
+              serviceName: k8s-cloud-call
+              servicePort: 80
+            path: /cloudCall/

@@ -1,0 +1,5 @@
+micro:
+  command: --registry_address=consul-server-bootstrap:8500 --api_handler=rpc api
+  image: registry.cn-qingdao.aliyuncs.com/kaoyaya-micro/micro:latest
+  hostname: micro
+  restart: always

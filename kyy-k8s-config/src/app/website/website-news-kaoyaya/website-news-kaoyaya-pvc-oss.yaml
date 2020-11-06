@@ -1,0 +1,14 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: news-kaoyaya-pv-oss
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: oss
+  resources:
+    requests:
+      storage: 5Gi
+  selector:
+    matchLabels:
+      alicloud-pvname: news-kaoyaya-pv-oss

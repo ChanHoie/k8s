@@ -1,0 +1,14 @@
+short-url-web-r:
+  image: 'registry.cn-qingdao.aliyuncs.com/kaoyaya-micro/short-url-web:v1'
+  command:
+    - '--registry_address=consul-server-bootstrap:8500'
+  ports:
+    - 80/tcp
+  labels:
+    aliyun.logs: /var/log
+    aliyun.proxy.VIRTUAL_HOST_WEIGHT: '10'
+    aliyun.routing.port_80:  "http://r.kaoyaya.com"
+  restart: always
+  environment:
+    - PORT=80
+  name: short-url-web-r

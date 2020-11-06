@@ -1,0 +1,24 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: local-redis
+  name: local-redis
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: local-redis
+    spec:
+      hostNetwork: true
+      spec:
+      containers:
+        - image: redis:2.8
+          name: local-redis
+          ports:
+            - containerPort: 6379
+          imagePullPolicy: Always
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30

@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: news-kaoyaya-pv-oss
+  labels:
+    alicloud-pvname: news-kaoyaya-pv-oss
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteMany
+  storageClassName: oss
+  flexVolume:
+    driver: "alicloud/oss"
+    options:
+      bucket: "kyy-wordpress"                       #请替换为您的Bucket名称
+      url: "oss-cn-beijing-internal.aliyuncs.com"    #请替换为您的URL
+      akId: "LTAIPvu0h6H7pYgK"                            #请替换为您的akId
+      akSecret: "ARnZxet1M2uLDzndk8S4HyQCPjiBE5"                        #请替换为您的akSecret
+      #otherOpts: "-o max_stat_cache_size=0 -o allow_other"   #请替换为您的otherOpts

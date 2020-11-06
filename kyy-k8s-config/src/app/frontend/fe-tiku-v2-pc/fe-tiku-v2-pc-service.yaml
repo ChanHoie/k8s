@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: fe-tiku-v2-pc
+  name: fe-tiku-v2-pc
+spec:
+  ports:
+    - name: "80"
+      port: 80
+      targetPort: 80
+  selector:
+    app: fe-tiku-v2-pc

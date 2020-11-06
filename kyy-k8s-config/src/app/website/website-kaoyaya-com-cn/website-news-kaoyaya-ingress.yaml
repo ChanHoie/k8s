@@ -1,0 +1,14 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  labels:
+    app: php-kaoyayacom
+  name: website-kaoyaya-com-cn
+spec:
+  rules:
+    - host: www.kaoyaya.com.cn
+      http:
+        paths:
+          - backend:
+              serviceName: php-kaoyayacom
+              servicePort: 80

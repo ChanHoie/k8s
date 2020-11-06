@@ -1,0 +1,33 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: voucher-service
+  name: voucher-service
+spec:
+  replicas: 2
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: voucher-service
+    spec:
+      containers:
+        - env:
+            - name: ADDRESS
+              value: 0.0.0.0:3003
+            - name: DATABASE_HOST
+              value: rm-2ze8m2daqb051wp49.mysql.rds.aliyuncs.com
+            - name: DATABASE_NAME
+              value: sq_kaoyaya
+            - name: DATABASE_PASSWORD
+              value: tdHRdT7V2o4d
+            - name: DATABASE_USER
+              value: kyy_master
+          image: registry.cn-qingdao.aliyuncs.com/kaoyaya/voucher-service
+          name: voucher-service
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3003
+          resources: {}
+      restartPolicy: Always

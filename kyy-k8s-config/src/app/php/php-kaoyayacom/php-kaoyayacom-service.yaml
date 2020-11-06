@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    aliyun.routing.port_80: http://www.kaoyaya.com;
+    kompose.cmd: kompose-darwin-amd64 convert -f php-kaoyayacom.yaml
+  labels:
+    app: php-kaoyayacom
+  name: php-kaoyayacom
+spec:
+  ports:
+    - name: "80"
+      port: 80
+      targetPort: 80
+  selector:
+    app: php-kaoyayacom
+

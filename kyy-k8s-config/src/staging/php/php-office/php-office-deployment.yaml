@@ -1,0 +1,21 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: php-office
+  name: php-office
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: php-office
+    spec:
+      containers:
+      - image: registry.cn-qingdao.aliyuncs.com/kaoyaya/0791hourse
+        name: php-office
+        ports:
+        - containerPort: 80
+        resources: {}
+      restartPolicy: Always

@@ -1,0 +1,30 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: micro-log
+  name: micro-log
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: micro-log
+    spec:
+      containers:
+      - args:
+        - --registry_address=consul-server-bootstrap:8500
+        env:
+        - name: DATABASE_HOST
+          value: rm-2ze8m2daqb051wp49.mysql.rds.aliyuncs.com
+        - name: DATABASE_NAME
+          value: sq_kaoyaya
+        - name: DATABASE_PASSWORD
+          value: tdHRdT7V2o4d
+        - name: DATABASE_USER
+          value: kyy_master
+        image: registry.cn-qingdao.aliyuncs.com/kaoyaya-micro/log:latest
+        name: micro-log
+        resources: {}
+      restartPolicy: Always

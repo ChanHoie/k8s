@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: short-url-web-r
+  name: short-url-web-r
+spec:
+  ports:
+  - name: "80"
+    port: 80
+    targetPort: 80
+  selector:
+    app: short-url-web-r

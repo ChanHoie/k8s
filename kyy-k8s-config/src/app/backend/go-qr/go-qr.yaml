@@ -1,0 +1,8 @@
+go-qr:
+  image: registry.cn-qingdao.aliyuncs.com/kaoyaya/qr:go
+  ports:
+    - '80'
+  restart: always
+  environment:
+    aliyun.proxy.VIRTUAL_HOST: "http://qr.kaoyaya.com"
+    aliyun.proxy.VIRTUAL_HOST_WEIGHT: '31'

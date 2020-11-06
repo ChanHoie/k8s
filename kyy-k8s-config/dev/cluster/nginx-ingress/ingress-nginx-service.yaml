@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: nginx-ingress
+    chart: nginx-ingress-1.11.0
+    component: controller
+    heritage: Tiller
+    release: nginx-ingress
+  name: nginx-ingress-controller
+  namespace: kube-system
+spec:
+  clusterIP: 10.108.82.35
+  externalTrafficPolicy: Cluster
+  ports:
+    - name: http
+      nodePort: 31169
+      port: 80
+      protocol: TCP
+      targetPort: http
+    - name: https
+      nodePort: 32504
+      port: 443
+      protocol: TCP
+      targetPort: https
+  selector:
+    app: nginx-ingress
+    component: controller
+    release: nginx-ingress
+  sessionAffinity: None
+  type: LoadBalancer
+  externalIPs:
+    - 192.168.3.220

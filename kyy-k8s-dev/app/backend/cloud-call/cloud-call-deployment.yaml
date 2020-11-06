@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: k8s-cloud-call
+  name: k8s-cloud-call
+spec:
+  replicas: 1
+  selector:
+   matchLabels:
+     app: k8s-cloud-call
+  template:
+    metadata:
+      labels:
+        app: k8s-cloud-call
+    spec:
+      containers:
+        - name: k8s-cloud-call
+          env:
+            - name: aliyun_client_id
+              value: '4514641779230730650'
+            - name: aliyun_client_secret
+              value: ypCmbMglb3VnMedssqFWGWT9ZRRi9sX26HvvsQN8f3BIokCfo85OLLQQ8CRrf1wF
+            - name: aliyun_client_callback
+              value: https://www.kyy.com/cloudCall/aliyun/auth/callback
+            - name: aliyun_test_username
+              value: chenkai@kaoyaya.onaliyun.com
+            - name: aliyun_test_password
+              value: 9vVwe$nh3Sb4?}HMPrmd6HfDzMUxUT)B
+            - name: aliyun_seatpool_expired
+              value: '900'
+            - name: server_port
+              value: '80'
+            # - name: security_require_ssl
+            #   value: 'true'
+            # - name: server_ssl_key_store
+            #   value: classpath:keystore.p12
+            # - name: server_ssl_key_store_password
+            #   value: Ali12345678
+            # - name: server_ssl_keyStoreType
+            #   value: PKCS12
+            # - name: server_ssl_keyAlias
+            #   value: tomcat
+            - name: spring_datasource_url
+              value: jdbc:mysql://test.server.kaoyaya.com:33006/sq_kaoyaya?characterEncoding=utf8&useSSL=false
+            - name: spring_datasource_username
+              value: root
+            - name: spring_datasource_password
+              value: kaoyayacom2017
+            - name: spring_jpa_generate_ddl
+              value: 'true'
+            - name: spring_jpa_hibernate_ddl_auto
+              value: update
+            - name: spring_redis_database
+              value: '0'
+            - name: spring_redis_host
+              value: 10.105.251.178
+            - name: spring_redis_port
+              value: '6379'
+            - name: spring_redis_password
+              value:
+            - name: aliyun_client_instance
+              value: '4638e41c-8c6e-47d9-aefd-aa16bb8857d6'
+          image: registry.cn-beijing.aliyuncs.com/kaoyaya-micro/cloud-call
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+          resources: {}
+      restartPolicy: Always
+

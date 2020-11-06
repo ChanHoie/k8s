@@ -1,0 +1,29 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: nuxt-kt
+  name: nuxt-kt
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: nuxt-kt
+    spec:
+      imagePullSecrets:
+        - name: beijing
+      containers:
+        - env:
+          - name: BASE_URL
+            value: go-api
+          - name: HOST
+            value: www.kuaixuezaixian.com
+          name: nuxt-kt
+          image: registry.cn-beijing.aliyuncs.com/kaoyaya/nuxt-ssr-kt:latest
+          ports:
+            - containerPort: 3000
+          resources: {}
+          imagePullPolicy: Always
+      restartPolicy: Always

@@ -1,0 +1,9 @@
+fe-admin:
+  image: registry.cn-qingdao.aliyuncs.com/kaoyaya/fe-admin
+  restart: always
+  expose:
+    - 80/tcp
+  labels:
+    aliyun.routing.port_80: http://www.kaoyaya.com/web/admin/
+    aliyun.proxy.VIRTUAL_HOST: "http://*/web/admin,https://*/web/admin,http://*/web/admin/*,https://*/web/admin/*"
+    aliyun.proxy.VIRTUAL_HOST_WEIGHT: '30'

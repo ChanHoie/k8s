@@ -1,0 +1,28 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose-darwin-amd64 convert -f  fe-tiku-v2-wap.yaml
+    kompose.version: 1.17.0 (70e82c92)
+
+  labels:
+    app: fe-tiku-v2-wap
+  name: fe-tiku-v2-wap
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: fe-tiku-v2-wap
+    spec:
+      imagePullSecrets:
+        - name: beijing
+      containers:
+        - image: registry.cn-beijing.aliyuncs.com/kaoyaya/fe-tiku-v2-wap:dev
+          name: fe-tiku-v2-wap
+          ports:
+            - containerPort: 80
+          resources: {}
+          imagePullPolicy: Always
+      restartPolicy: Always

@@ -1,0 +1,34 @@
+go-admin:
+  image: registry.cn-qingdao.aliyuncs.com/kaoyaya-micro/admin
+  restart: always
+  expose:
+    - 80/tcp
+  labels:
+    aliyun.routing.port_80: http://www.kaoyaya.com/admin/api/
+    aliyun.log_store_dbstdout: stdout
+    aliyun.log_ttl_dbstdout: 30
+  environment:
+    - RUN_MODE=production
+    - PORT=80
+    - DATABASE_HOST=rm-2zeb1f93086857hv0.mysql.rds.aliyuncs.com
+    - DATABASE_NAME=kaoyaya_yuncms
+    - DATABASE_USER=kkyy_yuncms
+    - DATABASE_PASSWORD=4PYmsab4Ukyh
+    - WECHAT_DB_HOST=rm-2zeb1f93086857hv0.mysql.rds.aliyuncs.com
+    - WECHAT_DB_NAME=wechat
+    - WECHAT_DB_USER=kyy_yuncms
+    - WECHAT_DB_PASSWORD=4PYmsab4Ukyh
+    - MASTER_DB_HOST=rm-2ze8m2daqb051wp49.mysql.rds.aliyuncs.com
+    - MASTER_DB_NAME=sq_kaoyaya
+    - MASTER_DB_USER=kyy_master
+    - MASTER_DB_PASSWORD=tdHRdT7V2o4d
+
+    - QUESTION_DB_HOST=rm-2ze1284oau0bzbz97.mysql.rds.aliyuncs.com
+    - QUESTION_DB_NAME=question
+    - QUESTION_DB_USER=kyy_question
+    - QUESTION_DB_PASSWORD=Nd1Gt6IgddAu
+    - SOCKET_URL=wss://wxws.kaoyaya.com
+    - SOCKET_SERVICE=wechat-im-socket:8000
+    - REDIS_HOST=r-2ze6269f42e1f8c4.redis.rds.aliyuncs.com:6379
+    - REDIS_AUTH=9V3zrtA338ULq6N7s2
+    - ELASTICESEARCH_HOST=http://elasticsearch:9200

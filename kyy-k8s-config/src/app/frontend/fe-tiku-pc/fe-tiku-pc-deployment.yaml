@@ -1,0 +1,22 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: fe-tiku-pc-v2
+  name: fe-tiku-pc
+spec:
+  replicas: 2
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: fe-tiku-pc
+    spec:
+      containers:
+        - image: registry.cn-beijing.aliyuncs.com/kaoyaya/fe-tiku-pc
+          name: fe-tiku-pc
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          resources: {}
+      restartPolicy: Always

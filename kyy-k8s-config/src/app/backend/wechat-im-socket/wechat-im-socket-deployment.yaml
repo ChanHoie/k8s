@@ -1,0 +1,31 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: wechat-im-socket
+  name: wechat-im-socket
+spec:
+  replicas: 1 # 必须使用1,多个会导致会话问题
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: wechat-im-socket
+    spec:
+      containers:
+        - env:
+            - name: LOGOUT_URL
+              value: http://php-kaoyayacom
+            - name: REDIS_AUTH
+              value: 9V3zrtA338ULq6N7s2
+            - name: REDIS_HOST
+              value: r-2ze6269f42e1f8c4.redis.rds.aliyuncs.com
+            - name: REDIS_PORT
+              value: "6379"
+          image: registry.cn-qingdao.aliyuncs.com/kaoyaya/wechat-im-socket
+          imagePullPolicy: Always
+          name: wechat-im-socket
+          ports:
+            - containerPort: 8000
+          resources: {}
+      restartPolicy: Always

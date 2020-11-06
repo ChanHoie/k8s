@@ -1,0 +1,20 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  labels:
+    app: website-music
+  name: website-music
+spec:
+  rules:
+    - host: "1jiedai.com"
+      http:
+        paths:
+          - backend:
+              serviceName: website-music
+              servicePort: 80
+    - host: "www.1jiedai.com"
+      http:
+        paths:
+          - backend:
+              serviceName: website-music
+              servicePort: 80

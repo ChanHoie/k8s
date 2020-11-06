@@ -1,0 +1,31 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: nuxt-kc
+  name: nuxt-kc
+spec:
+  replicas: 2
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: nuxt-kc
+    spec:
+      containers:
+        - env:
+          - name: BASE_URL
+            value: go-api
+          - name: HOST
+            value: www.kaoyaya.com
+          - name: aliyun_logs_log-nuxt-kc
+            value: stdout
+          - name: aliyun_logs_nuxt-kc_tags
+            value: tag1=nuxt-kc
+          name: nuxt-kc
+          image: registry-vpc.cn-beijing.aliyuncs.com/kaoyaya/nuxt-ssr-kc:latest
+          ports:
+            - containerPort: 3000
+          resources: {}
+          imagePullPolicy: Always
+      restartPolicy: Always

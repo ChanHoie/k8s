@@ -1,0 +1,77 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: go-admin
+  name: go-admin
+spec:
+  replicas: 2
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: go-admin
+    spec:
+      containers:
+        - name: go-admin
+          env:
+            - name: DATABASE_HOST
+              value: rm-2zeb1f93086857hv0.mysql.rds.aliyuncs.com
+            - name: DATABASE_NAME
+              value: kaoyaya_yuncms
+            - name: DATABASE_PASSWORD
+              value: 4PYmsab4Ukyh
+            - name: DATABASE_USER
+              value: kyy_yuncms
+            - name: ELASTICESEARCH_HOST
+              value: http://elasticsearch:9200
+            - name: MASTER_DB_HOST
+              value: rm-2ze8m2daqb051wp49.mysql.rds.aliyuncs.com
+            - name: MASTER_DB_NAME
+              value: sq_kaoyaya
+            - name: MASTER_DB_PASSWORD
+              value: tdHRdT7V2o4d
+            - name: MASTER_DB_USER
+              value: kyy_master
+            - name: PORT
+              value: "80"
+            - name: QUESTION_DB_HOST
+              value: rm-2ze1284oau0bzbz97.mysql.rds.aliyuncs.com
+            - name: QUESTION_DB_NAME
+              value: question
+            - name: QUESTION_DB_PASSWORD
+              value: Nd1Gt6IgddAu
+            - name: QUESTION_DB_USER
+              value: kyy_question
+            - name: REDIS_AUTH
+              value: 9V3zrtA338ULq6N7s2
+            - name: REDIS_HOST
+              value: r-2ze6269f42e1f8c4.redis.rds.aliyuncs.com:6379
+            - name: RUN_MODE
+              value: production
+            - name: SOCKET_SERVICE
+              value: wechat-im-socket:8000
+            - name: SOCKET_URL
+              value: wss://wxws.kaoyaya.com
+            - name: WECHAT_DB_HOST
+              value: rm-2zeb1f93086857hv0.mysql.rds.aliyuncs.com
+            - name: WECHAT_DB_NAME
+              value: wechat
+            - name: WECHAT_DB_PASSWORD
+              value: 4PYmsab4Ukyh
+            - name: WECHAT_DB_USER
+              value: kyy_yuncms
+            - name: MAXCOMPUTE_DB_HOST
+              value: rm-2ze8m2daqb051wp49.mysql.rds.aliyuncs.com
+            - name: MAXCOMPUTE_DB_NAME
+              value: maxcompute
+            - name: MAXCOMPUTE_DB_PASSWORD
+              value: tdHRdT7V2o4d
+            - name: MAXCOMPUTE_DB_USER
+              value: kyy_master
+          image: registry.cn-beijing.aliyuncs.com/kaoyaya-micro/admin
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          resources: {}
+      restartPolicy: Always

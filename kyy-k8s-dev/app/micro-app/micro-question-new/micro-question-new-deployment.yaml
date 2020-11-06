@@ -1,0 +1,47 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: micro-question-new
+  name: micro-question-new
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: micro-question-new
+    spec:
+      imagePullSecrets:
+        - name: qingdao
+      containers:
+        - args:
+            - --registry_address=consul-server-bootstrap:8500
+          env:
+            - name: DATABASE_HOST
+              value: 112.126.99.74:33006
+            - name: DATABASE_NAME
+              value: kaoyayacn
+            - name: DATABASE_PASSWORD
+              value: kaoyayacom2017
+            - name: DATABASE_USER
+              value: root
+            - name: QUESTION_DB_HOST
+              value: 112.126.99.74:33006
+            - name: QUESTION_DB_NAME
+              value: question
+            - name: QUESTION_DB_PASSWORD
+              value: kaoyayacom2017
+            - name: QUESTION_DB_USER
+              value: root
+            - name: REDIS_AUTH
+              value: ""
+            - name: REDIS_HOST
+              value: 192.168.118.174:6379
+            - name: RUN_MODE
+              value: production
+          image: registry.cn-qingdao.aliyuncs.com/kaoyaya-micro/question-new:dev
+          imagePullPolicy: Always
+          name: micro-question-new
+          resources: {}
+      restartPolicy: Always

@@ -1,0 +1,14 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  labels:
+    app: chatbot
+  name: chatbot
+spec:
+  rules:
+    - host: chatbot.kaoyaya.com
+      http:
+        paths:
+          - backend:
+              serviceName: chatbot
+              servicePort: 80

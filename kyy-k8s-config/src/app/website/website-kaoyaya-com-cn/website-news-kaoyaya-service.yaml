@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: website-kaoyaya-com-cn
+  name: website-kaoyaya-com-cn
+spec:
+  ports:
+    - name: "80"
+      port: 80
+      targetPort: 80
+  selector:
+    app: website-kaoyaya-com-cn

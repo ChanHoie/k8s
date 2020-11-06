@@ -1,0 +1,39 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: back-mysql
+  name: back-mysql
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: back-mysql
+    spec:
+      spec:
+      volumes:
+        - name: back-mysql
+          hostPath:
+            path: /mnt/mysql/db/
+        - name: back-mysql-conf
+          hostPath:
+            path: /mnt/conf/
+      containers:
+        - image: mysql:5.6
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: root
+          name: dev-mysql
+          ports:
+            - containerPort: 3306
+              hostPort: 3306
+          imagePullPolicy: Always
+          volumeMounts:
+            - mountPath: /var/lib/mysql
+              name: back-mysql
+            - mountPath: /etc/mysql/conf.d/
+              name: back-mysql-conf
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30

@@ -1,0 +1,14 @@
+version: "2"
+labels:
+  aliyun.schedule: "0 0 3 * * *"
+services:
+    user-persona:
+           image: "registry.cn-qingdao.aliyuncs.com/kaoyaya-micro/user-persona:0510"
+           environment:
+            - RUN_MODE=production
+            - PORT=80
+            - MASTER_DB_HOST=rm-2ze8m2daqb051wp49.mysql.rds.aliyuncs.com
+            - MASTER_DB_NAME=sq_kaoyaya
+            - MASTER_DB_USER=kyy_master
+            - MASTER_DB_PASSWORD=tdHRdT7V2o4d
+            - ELASTICESEARCH_HOST=http://elasticsearch:9200

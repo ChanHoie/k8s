@@ -35,4 +35,3 @@ spec:
           path: /root/work/
       hostNetwork: true
       restartPolicy: Always
-

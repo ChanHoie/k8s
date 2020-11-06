@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: wechat-im-socket
+  labels:
+    app: wechat-im-socket
+spec:
+  rules:
+    - host: "wxws.kuaixuezaixian.com"
+      http:
+        paths:
+          - path: ""
+            backend:
+              serviceName: wechat-im-socket
+              servicePort: 8000
+

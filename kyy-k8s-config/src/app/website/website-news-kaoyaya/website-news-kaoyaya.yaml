@@ -1,0 +1,12 @@
+website-news-kaoyaya:
+  image: wordpress:php7.3
+  ports:
+    - '80'
+  restart: always
+  environment:
+    WORDPRESS_DB_HOST: 112.126.99.74
+    WORDPRESS_DB_USER: root
+    WORDPRESS_DB_PASSWORD: kaoyayacom2017
+    WORDPRESS_DB_NAME: wordpress
+  labels:
+    aliyun.routing.port_80: http://www.kaoyaya.com.cn

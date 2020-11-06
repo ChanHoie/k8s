@@ -1,0 +1,12 @@
+version: "2"
+labels:
+  aliyun.schedule: "0 1 0 * * 1"
+services:
+    question-analysis:
+      image: 'registry.cn-qingdao.aliyuncs.com/kaoyaya/question-analysis:latest'
+      restart: always
+      environment:
+            - QUESTION_DB_HOST=rm-2ze1284oau0bzbz97.mysql.rds.aliyuncs.com
+            - QUESTION_DB_NAME=question
+            - QUESTION_DB_USER=kyy_question
+            - QUESTION_DB_PASSWORD=Nd1Gt6IgddAu

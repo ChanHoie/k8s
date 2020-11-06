@@ -1,0 +1,21 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  labels:
+    app: short-url
+  name: short-url
+spec:
+  tls:
+    - hosts:
+        - www.kyy1.cn
+      # This assumes tls-secret exists and the SSL
+      # certificate contains a CN for foo.bar.com
+      secretName: kyy1.cn
+  rules:
+    - host: 'www.kyy1.cn'
+      http:
+        paths:
+          - backend:
+              serviceName: short-url
+              servicePort: 80
+            path: /

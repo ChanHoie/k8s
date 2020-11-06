@@ -1,0 +1,49 @@
+# https://kubernetes.io/docs/tasks/job/automated-tasks-with-cron-jobs/
+apiVersion: batch/v1beta1 # 不同于 apps/v1beta1
+kind: CronJob
+metadata:
+  name: example-cronjob
+  namespace: default
+spec:
+  # 执行时间 https://kubernetes.io/docs/tasks/job/automated-tasks-with-cron-jobs/#schedule
+  schedule: "*/10 * * * *" # 分0-59 时0-23 天1-31 月1-12 周0-7
+  # 是否允许并发 https://kubernetes.io/docs/tasks/job/automated-tasks-with-cron-jobs/#concurrency-policy
+  concurrencyPolicy: Forbid # 可选 Forbid | Allow | Replace
+  # 历史任务保留次数 https://kubernetes.io/docs/tasks/job/automated-tasks-with-cron-jobs/#jobs-history-limits
+  successfulJobsHistoryLimit: 3 # 保留成功次数
+  failedJobsHistoryLimit: 1 # 保留失败历史次数
+  # 是否挂起 https://kubernetes.io/docs/tasks/job/automated-tasks-with-cron-jobs/#suspend
+  suspend: false
+  # jobTemplate 具体说明 https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion
+  jobTemplate:
+    metadata: {}
+    spec:
+      # job的持续时间,到达持续时间还没执行完将被终止执行 https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/#job-termination-and-cleanup
+      activeDeadlineSeconds: 600
+      # 视为job失败之前重试的次数 https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/#pod-backoff-failure-policy
+      backoffLimit: 6
+      completions: 1
+      parallelism: 1
+      template:
+        spec:
+          containers:
+            - name: example-cronjob
+              image: busybox
+              imagePullPolicy: IfNotPresent
+              args:
+                - /bin/sh
+                - -c
+                - date; echo Hello from the Kubernetes cluster
+              resources:
+                requests:
+                  cpu: 250m
+                  memory: 512Mi
+              terminationMessagePath: /dev/termination-log
+              terminationMessagePolicy: File
+          dnsPolicy: ClusterFirst
+          # 重启策略  https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/#pod-template
+          restartPolicy: OnFailure # OnFailure | Never
+          schedulerName: default-scheduler
+          securityContext: {}
+          terminationGracePeriodSeconds: 30
+

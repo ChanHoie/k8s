@@ -1,0 +1,18 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  labels:
+    app: go-admin
+  name: go-admin
+  annotations:
+    nginx.ingress.kubernetes.io/server-alias: "zckjpx.kuaixuezaixian.com,caishidian.kuaixuezaixian.com"
+spec:
+  rules:
+    - host: "www.kuaixuezaixian.com"
+      http:
+        paths:
+          - backend:
+              serviceName: go-admin
+              servicePort: 80
+            path: /admin/api/
+

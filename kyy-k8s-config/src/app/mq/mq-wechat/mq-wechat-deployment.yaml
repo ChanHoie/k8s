@@ -1,0 +1,42 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: mq-wechat
+  name: mq-wechat
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: mq-wechat
+    spec:
+      containers:
+        - args:
+            - --registry_address=consul-server-bootstrap:8500
+          env:
+            - name: DATABASE_HOST
+              value: rm-2zeb1f93086857hv0.mysql.rds.aliyuncs.com
+            - name: DATABASE_NAME
+              value: kaoyaya_yuncms
+            - name: DATABASE_PASSWORD
+              value: 4PYmsab4Ukyh
+            - name: DATABASE_USER
+              value: kyy_yuncms
+            - name: REDIS_AUTH
+              value: 9V3zrtA338ULq6N7s2
+            - name: REDIS_HOST
+              value: r-2ze6269f42e1f8c4.redis.rds.aliyuncs.com:6379
+            - name: WECHAT_DB_HOST
+              value: rm-2zeb1f93086857hv0.mysql.rds.aliyuncs.com
+            - name: WECHAT_DB_NAME
+              value: wechat
+            - name: WECHAT_DB_PASSWORD
+              value: 4PYmsab4Ukyh
+            - name: WECHAT_DB_USER
+              value: kyy_yuncms
+          image: registry.cn-qingdao.aliyuncs.com/kaoyaya-micro/wechat-mq:0531
+          name: mq-wechat
+          resources: {}
+      restartPolicy: Always

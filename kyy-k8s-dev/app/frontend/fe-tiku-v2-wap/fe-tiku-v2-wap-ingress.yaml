@@ -1,0 +1,18 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  labels:
+    app: fe-tiku-v2-wap
+  name: fe-tiku-v2-wap
+  annotations:
+    nginx.ingress.kubernetes.io/server-alias: "lzh.kyy.com,caishidian.kyy.com"
+spec:
+  rules:
+    - host: 'www.kyy.com'
+      http:
+        paths:
+          - backend:
+              serviceName: fe-tiku-v2-wap
+              servicePort: 80
+            path: /tiku/v2/wap/
+

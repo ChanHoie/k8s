@@ -1,0 +1,58 @@
+# 定时推送查分任务
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: marketing-get-score-work
+  labels:
+    app: marketing-get-score-work
+spec:
+  concurrencyPolicy: Forbid
+  schedule: "*/2 * * * *"
+  successfulJobsHistoryLimit: 1
+  suspend: false
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    metadata:
+      labels:
+        app: marketing-get-score-work
+    spec:
+      template:
+        spec:
+          containers:
+            - env:
+                - name: DATABASE_HOST
+                  value: rm-2zeb1f93086857hv0.mysql.rds.aliyuncs.com
+                - name: DATABASE_NAME
+                  value: kaoyaya_yuncms
+                - name: DATABASE_PASSWORD
+                  value: 4PYmsab4Ukyh
+                - name: DATABASE_USER
+                  value: kyy_yuncms
+                - name: MASTER_DB_HOST
+                  value: rm-2ze8m2daqb051wp49.mysql.rds.aliyuncs.com
+                - name: MASTER_DB_NAME
+                  value: sq_kaoyaya
+                - name: MASTER_DB_PASSWORD
+                  value: tdHRdT7V2o4d
+                - name: MASTER_DB_USER
+                  value: kyy_master
+                - name: PORT
+                  value: "80"
+                - name: REDIS_AUTH
+                  value: 9V3zrtA338ULq6N7s2
+                - name: REDIS_HOST
+                  value: r-2ze6269f42e1f8c4.redis.rds.aliyuncs.com:6379
+                - name: RUN_MODE
+                  value: production
+                - name: WECHAT_DB_HOST
+                  value: rm-2zeb1f93086857hv0.mysql.rds.aliyuncs.com
+                - name: WECHAT_DB_NAME
+                  value: wechat
+                - name: WECHAT_DB_PASSWORD
+                  value: 4PYmsab4Ukyh
+                - name: WECHAT_DB_USER
+                  value: kyy_yuncms
+              image: registry.cn-beijing.aliyuncs.com/kaoyaya-micro/marketing-get-score-work:latest
+              name: marketing-get-score-work
+              resources: {}
+          restartPolicy: Never

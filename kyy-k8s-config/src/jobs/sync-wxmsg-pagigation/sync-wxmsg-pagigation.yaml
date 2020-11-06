@@ -1,0 +1,15 @@
+sync-wxmsg-pagigation:
+  image: 'registry.cn-qingdao.aliyuncs.com/kaoyaya-micro/sync-wxmsg-pagigation'
+  labels:
+    aliyun.logs: /var/log
+  restart: always
+  environment:
+    - RUN_MODE=production
+    - WECHAT_DB_HOST=rm-2zeb1f93086857hv0.mysql.rds.aliyuncs.com
+    - WECHAT_DB_NAME=wechat
+    - WECHAT_DB_USER=kyy_yuncms
+    - WECHAT_DB_PASSWORD=4PYmsab4Ukyh
+    # 同步的pageSize
+    - PAGE_SIZE=10000
+    # 插入数据并发数
+    - GOROUTINE_COUNT=32

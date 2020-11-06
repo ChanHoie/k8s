@@ -1,0 +1,32 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: elasticsearch
+  name: elasticsearch
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: elasticsearch
+    spec:
+      containers:
+        - env:
+            - name: ES_JAVA_OPTS
+              value: -Xms1g -Xmx1g
+          image: docker.elastic.co/elasticsearch/elasticsearch:6.4.0
+          name: elasticsearch
+          ports:
+            - containerPort: 9200
+          resources: {}
+          volumeMounts:
+            - mountPath: /usr/share/elasticsearch/data
+              name: elasticsearch-claim0
+      restartPolicy: Always
+      volumes:
+        - name: elasticsearch-claim0
+          persistentVolumeClaim:
+            claimName: elasticsearch-claim0

@@ -1,0 +1,14 @@
+solr:
+  image: registry.cn-qingdao.aliyuncs.com/kaoyaya/solr
+  restart: always
+  hostname: solr-service
+skaoyaya-1.0:
+  expose:
+    -  80/tcp
+  image: registry.cn-qingdao.aliyuncs.com/kaoyaya/skaoyaya
+  restart: always
+  labels:
+    aliyun.proxy.VIRTUAL_HOST: "http://s.kaoyaya.com"
+    aliyun.proxy.VIRTUAL_HOST_WEIGHT: '30'
+  environment:
+   - SOLR_HOST=solr-service

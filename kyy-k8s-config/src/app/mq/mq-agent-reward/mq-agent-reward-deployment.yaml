@@ -1,0 +1,33 @@
+# 代理提成计算
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: mq-agent-reward
+  labels:
+    app: mq-agent-reward
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: mq-agent-reward
+    spec:
+      containers:
+        - env:
+            - name: MASTER_DB_HOST
+              value: rm-2ze8m2daqb051wp49.mysql.rds.aliyuncs.com
+            - name: MASTER_DB_NAME
+              value: sq_kaoyaya
+            - name: MASTER_DB_PASSWORD
+              value: tdHRdT7V2o4d
+            - name: MASTER_DB_USER
+              value: kyy_master
+            - name: REDIS_AUTH
+              value: 9V3zrtA338ULq6N7s2
+            - name: REDIS_HOST
+              value: r-2ze6269f42e1f8c4.redis.rds.aliyuncs.com:6379
+          image: registry.cn-qingdao.aliyuncs.com/kaoyaya-micro/agent-reward:latest
+          name: agent-reward
+          resources: {}
+      restartPolicy: Always
